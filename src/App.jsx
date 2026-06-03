@@ -433,7 +433,7 @@ const App = () => {
         ></video>
         <div className="footer-video-overlay"></div>
 
-        <div className="footer-content-wrapper" style={{ display: "flex", justifyContent: "center", paddingBottom: "60px", position: "relative", zIndex: 2 }}>
+        <div className="footer-content-wrapper" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "60px", position: "relative", zIndex: 2 }}>
           <BuyMeCoffeeCard
             image="/imgi_17_buy-me-a-coffee.png"
             coffeeLink="https://buymeacoffee.com/portalrush"
@@ -441,6 +441,28 @@ const App = () => {
             description={t.bmcDesc}
             buttonText={t.bmcBtn}
           />
+
+          <div style={{ marginTop: '32px', textAlign: 'center', width: '100%' }}>
+            <p style={{ color: '#7bcfe7', fontSize: '0.85rem', fontFamily: 'var(--font-body)', letterSpacing: '0.05em', marginBottom: '0', opacity: 0.9, paddingBottom: '16px' }}>
+              15 anos de conteúdos sobre o RUSH
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', width: '100vw', marginLeft: 'calc(-50vw + 50%)', gap: 0 }}>
+            {[
+              { num: 1, href: 'https://www.camisasdorush.com.br/colecoes/geddy-lee/' },
+              { num: 2, href: 'https://www.camisasdorush.com.br/colecoes/neil-peart/' },
+              { num: 3, href: 'https://www.camisasdorush.com.br/colecoes/alex-lifeson/' },
+              { num: 4, href: 'https://www.camisasdorush.com.br/colecoes/albuns/' },
+              { num: 5, href: 'https://www.camisasdorush.com.br/colecoes/minimalista/' },
+            ].map(({ num, href }) => (
+              <a href={href} target="_blank" rel="noopener noreferrer" key={num} style={{ display: 'block', width: '20%', aspectRatio: '1 / 1', overflow: 'hidden', flexShrink: 0, position: 'relative' }}
+                onMouseEnter={(e) => { e.currentTarget.querySelector('img').style.transform = 'scale(1.05)'; }}
+                onMouseLeave={(e) => { e.currentTarget.querySelector('img').style.transform = 'scale(1)'; }}
+              >
+                <img src={`/banner-${num}.webp`} alt={`Coleção ${num}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }} />
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="footer-inner">
