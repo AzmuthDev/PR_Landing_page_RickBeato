@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const CAROUSEL_DATA = [
   {
@@ -145,118 +145,157 @@ const CAROUSEL_DATA = [
   }
 ];
 
+// Duplicate the array for seamless infinite loop
+const DOUBLED_DATA = [...CAROUSEL_DATA, ...CAROUSEL_DATA];
+
 export const CardCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCardId, setSelectedCardId] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const resumeTimerRef = useRef(null);
 
-  const nextCard = () => {
-    setCurrentIndex((prev) => (prev + 1) % CAROUSEL_DATA.length);
+  const handleCardClick = (item) => {
+    if (selectedCardId === item.id) {
+      // Deselect
+      setSelectedCardId(null);
+      setIsPaused(false);
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+      return;
+    }
+    // Select card
+    setSelectedCardId(item.id);
+    setIsPaused(true);
+    // Auto-resume after 8 seconds
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => {
+      setSelectedCardId(null);
+      setIsPaused(false);
+    }, 8000);
   };
 
-  const prevCard = () => {
-    setCurrentIndex((prev) => (prev - 1 + CAROUSEL_DATA.length) % CAROUSEL_DATA.length);
-  };
-
-  const handleCardClick = (idx) => {
-    setCurrentIndex(idx);
-  };
-
-  // Auto-play effect: changes the highlighted card every 5 seconds
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      nextCard();
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+  const cardWidth = 200; // px
+  const gap = 16; // px
+  const totalWidth = CAROUSEL_DATA.length * (cardWidth + gap);
 
   return (
     <section className="interactive-carousel-section" id="carousel">
-      <div className="interactive-carousel-container">
-        
-        <button className="carousel-nav-btn prev-btn" onClick={prevCard} aria-label="Anterior">
-          <ChevronLeft size={32} />
-        </button>
+      <style>{`
+        @keyframes marquee-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-${totalWidth}px); }
+        }
+        .marquee-track {
+          display: flex;
+          gap: ${gap}px;
+          animation: marquee-scroll 60s linear infinite;
+          width: max-content;
+        }
+        .marquee-track.paused {
+          animation-play-state: paused;
+        }
+        .marquee-container {
+          overflow: hidden;
+          width: 100%;
+          position: relative;
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .marquee-card {
+          flex-shrink: 0;
+          width: ${cardWidth}px;
+          border-radius: 1rem;
+          overflow: hidden;
+          cursor: pointer;
+          transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+          position: relative;
+          opacity: 0.75;
+        }
+        .marquee-card:hover {
+          opacity: 1;
+        }
+        .marquee-card.selected {
+          transform: scale(1.15);
+          opacity: 1;
+          z-index: 20;
+          box-shadow: 0 0 30px rgba(123, 207, 231, 0.4), 0 8px 40px rgba(0,0,0,0.5);
+        }
+        .marquee-card img {
+          width: 100%;
+          height: 280px;
+          object-fit: cover;
+          display: block;
+          border-radius: 1rem;
+        }
+        .marquee-card-info {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
+          padding: 60px 12px 14px 12px;
+          border-radius: 0 0 1rem 1rem;
+        }
+        .marquee-card-info .info-title {
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #7bcfe7;
+          margin: 0 0 4px 0;
+        }
+        .marquee-card-info .info-desc {
+          font-size: 0.7rem;
+          color: rgba(255,255,255,0.85);
+          margin: 0 0 8px 0;
+          line-height: 1.4;
+        }
+        .marquee-card-info .info-link {
+          font-size: 0.7rem;
+          color: #7bcfe7;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-weight: 600;
+        }
+        .marquee-card-info .info-link:hover {
+          text-decoration: underline;
+        }
+      `}</style>
 
-        <div className="carousel-cards-wrapper">
-          <AnimatePresence initial={false} mode="popLayout">
-            {[-2, -1, 0, 1, 2].map((offset) => {
-              const len = CAROUSEL_DATA.length;
-              const index = (currentIndex + offset + len) % len;
-              const item = CAROUSEL_DATA[index];
-              const isCenter = offset === 0;
-              const absDiff = Math.abs(offset);
-
-              // Animation values
-              const scale = isCenter ? 1.05 : 0.85;
-              const opacity = isCenter ? 1 : 0.5;
-              const zIndex = 10 - absDiff;
-              const xPos = offset * 260; // spacing in pixels
-
-              return (
-                <motion.div
-                  key={item.id}
-                  className={`interactive-carousel-card ${isCenter ? 'active' : ''}`}
-                  onClick={() => handleCardClick(index)}
-                  initial={{ 
-                    x: xPos + (offset > 0 ? 260 : -260), 
-                    opacity: 0, 
-                    scale: 0.5 
-                  }}
-                  animate={{
-                    x: xPos,
-                    scale: scale,
-                    opacity: opacity,
-                    zIndex: zIndex,
-                  }}
-                  exit={{ 
-                    x: xPos + (offset < 0 ? -260 : 260), 
-                    opacity: 0, 
-                    scale: 0.5 
-                  }}
-                  transition={{ type: 'spring', stiffness: 250, damping: 25 }}
-                >
-                  
-                  {isCenter && (
-                    <motion.div 
-                      className="carousel-card-top-box"
+      <div className="marquee-container">
+        <div className={`marquee-track ${isPaused ? 'paused' : ''}`}>
+          {DOUBLED_DATA.map((item, i) => {
+            const isSelected = selectedCardId === item.id;
+            return (
+              <div
+                key={`${item.id}-${i}`}
+                className={`marquee-card ${isSelected ? 'selected' : ''}`}
+                onClick={() => handleCardClick(item)}
+              >
+                <img src={item.src} alt={item.topTitle} loading="lazy" />
+                <AnimatePresence>
+                  {isSelected && (
+                    <motion.div
+                      className="marquee-card-info"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.15 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.25 }}
                     >
-                      <span className="top-box-title">{item.topTitle}</span>
-                    </motion.div>
-                  )}
-
-                  <div className="carousel-card-image-wrapper">
-                    <img src={item.src} alt={item.topTitle} loading="lazy" />
-                  </div>
-
-                  {isCenter && (
-                    <motion.div 
-                      className="carousel-card-bottom-box"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.15 }}
-                    >
-                      <h4 className="bottom-box-title">Module Overview</h4>
-                      <p className="bottom-box-desc">{item.description}</p>
-                      
+                      <p className="info-title">{item.topTitle}</p>
+                      <p className="info-desc">{item.description}</p>
                       {item.link !== '#' && (
-                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="bottom-box-link">
-                          Explore History <ExternalLink size={14} />
+                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="info-link" onClick={(e) => e.stopPropagation()}>
+                          Explore History <ExternalLink size={12} />
                         </a>
                       )}
                     </motion.div>
                   )}
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
-
-        <button className="carousel-nav-btn next-btn" onClick={nextCard} aria-label="Próximo">
-          <ChevronRight size={32} />
-        </button>
-
       </div>
     </section>
   );
