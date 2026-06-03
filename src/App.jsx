@@ -14,6 +14,7 @@ import { Floating3DWrapper } from './components/ui/3d-card';
 import { BuyMeCoffeeCard } from './components/ui/buy-me-coffee-card';
 import { AboutMeSection } from './components/ui/AboutMeSection';
 import { GeddyEasterEgg } from './components/ui/GeddyEasterEgg';
+import { CardCarousel } from './components/ui/CardCarousel';
 import { translations } from './translations.jsx';
 import './index.css';
 
@@ -386,6 +387,9 @@ const App = () => {
           </div>
         )}
       </section>
+
+      {/* ===== CARD CAROUSEL (SNAP / CENTER MODE) ===== */}
+      <CardCarousel />
 
       {/* ===== SOBRE MIM SECTION (4TH FOLD) ===== */}
       <AboutMeSection t={t} />
