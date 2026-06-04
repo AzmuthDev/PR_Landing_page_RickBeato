@@ -95,10 +95,11 @@ const TRACK_3_IMAGES = POSTS_BATCH_3;
 const CARD_W = 200;
 const GAP = 16;
 
-/* ===== Pre-calculate set widths (N cards + N-1 gaps) ===== */
-const TRACK_1_SET_W = TRACK_1_IMAGES.length * CARD_W + (TRACK_1_IMAGES.length - 1) * GAP;
-const TRACK_2_SET_W = TRACK_2_IMAGES.length * CARD_W + (TRACK_2_IMAGES.length - 1) * GAP;
-const TRACK_3_SET_W = TRACK_3_IMAGES.length * CARD_W + (TRACK_3_IMAGES.length - 1) * GAP;
+/* ===== Pre-calculate set widths ===== */
+/* Em flex com gap, item N começa em N*(CARD_W+GAP). Esse é o translateX exato para loop perfeito. */
+const TRACK_1_SET_W = TRACK_1_IMAGES.length * (CARD_W + GAP);
+const TRACK_2_SET_W = TRACK_2_IMAGES.length * (CARD_W + GAP);
+const TRACK_3_SET_W = TRACK_3_IMAGES.length * (CARD_W + GAP);
 
 /* ===== Reusable marquee track component ===== */
 const MarqueeTrack = ({ images, speed = 60, trackId, selectedCardId, onCardClick, isInView }) => {
@@ -123,7 +124,7 @@ const MarqueeTrack = ({ images, speed = 60, trackId, selectedCardId, onCardClick
               onClick={() => onCardClick(id, isSimple ? null : item)}
             >
               {isInView && (
-                <img src={src} alt="Portal Rush Brasil" loading="lazy" decoding="async" />
+                <img src={src} alt="Portal Rush Brasil" decoding="async" />
               )}
               <AnimatePresence>
                 {isSelected && !isSimple && (
