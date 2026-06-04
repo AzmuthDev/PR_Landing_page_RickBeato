@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 
-/* ===== TRACK 1 — Original curated cards with info (left → right) ===== */
-const TRACK_1_DATA = [
+/* ===== CURATED CARDS with metadata (used in Track 1) ===== */
+const CURATED_CARDS = [
   { id: 't1-1', src: '/rush-reposted-portal-rush1.jpg', topTitle: 'Rush South Park', description: 'Repostado pelo @RUSH - South Park.', link: 'https://www.instagram.com/stories/highlights/18281584825282043/' },
   { id: 't1-2', src: '/Jillian-Maryonovich-rushcon.jpg', topTitle: 'RushCon', description: 'Jillian Maryonovich - Diretora Criativa da RushCon. "You work is fantastic! Really fun stuff".', link: 'https://x.com/RushFanCast/status/1854733719627608282' },
   { id: 't1-3', src: '/portal-rush-mtv-hulk.jpg', topTitle: 'MTV Hulk', description: 'Carol Zaine - Portal Rush Brasil - MTV - HULK.JPG', link: 'https://www.flickr.com/photos/carolzaine/albums/72157625125588376/' },
@@ -26,8 +26,8 @@ const TRACK_1_DATA = [
   { id: 't1-20', src: '/tanios-whiplash.jpg', topTitle: 'Whiplash', description: 'Entrevistas e contribuições para o portal Whiplash.', link: '#' },
 ];
 
-/* ===== TRACK 2 — Posts batch 1: 121 images (right → left) ===== */
-const TRACK_2_IMAGES = [
+/* ===== ALL POST IMAGES — Pool unificado de 241 imagens ===== */
+const ALL_POSTS = [
   '17842051340128126','17842653982957578','17842747775703897','17843656753726529','17844393162634581',
   '17848013387470588','17848297095677319','17848371319534105','17848618230662973','17849730673947215',
   '17850941332804740','17851720358463067','17851780159788147','17852803521646347','17853515951119000',
@@ -50,81 +50,81 @@ const TRACK_2_IMAGES = [
   '18018138043347771','18018228155485695','18020723173943982','18021074687753604','18021714859907035',
   '18028592651423180','18029273531716343','18033451496443217','18036778628572043','18037217684647735',
   '18039016399236573','18039112553549445','18039646820775406','18040454131692279','18042352505713293',
-  '18042775591957341',
+  '18042775591957341','18043589045738050','18048420086443603','18050972147708282','18051136373702642',
+  '18052797667200869','18057653474465102','18060821554179132','18060920771558194','18064745795565922',
+  '18065458555893940','18065548718427832','18068247757241581','18068368310477578','18072155702414346',
+  '18073202564282482','18075411077549017','18077942039424666','18080412329164154','18081087634924311',
+  '18081444677413683','18083979317458661','18084217021151008','18084293156591509','18085299697801893',
+  '18085790998982186','18086452100327781','18087410312520085','18088089515043418','18088430270225194',
+  '18088631563794873','18088705246835231','18088756703142249','18089388631162441','18089395466272775',
+  '18089539360834725','18090320638583903','18090536828520886','18090562067136858','18091550048265884',
+  '18091610870128336','18091667755748825','18092160907872722','18092449127039682','18092656006858961',
+  '18092765594599952','18092937487530484','18093412627529208','18093483104044780','18093533197105338',
+  '18093646786912548','18096588871886658','18096983806779423','18097888702506531','18098292010830329',
+  '18100435769051309','18100727384088895','18100879795997228','18101128567946467','18101728741620952',
+  '18102472406480153','18102834829071113','18103008688737629','18103167542077885','18106141585641319',
+  '18106824487673943','18106842058780454','18108141649837725','18109376599835177','18111086020696076',
+  '18112305520742176','18113332273710233','18113788324699962','18115235050606606','18116006137727794',
+  '18116464624570306','18117254611557534','18117660151726951','18117756415672088','18118486045563967',
+  '18120765295550034','18121087234492965','18121977166636796','18123243571525079','18123581353004510',
+  '18124415413721079','18126884371494101','18127431967149085','18128986672494448','18129608455605670',
+  '18129878932544283','18131372941551137','18134145847478177','18134558647502855','18145916023488183',
+  '18151718410470274','18153532555422064','18160224553427035','18161971708426505','18167488198410806',
+  '18183295339324181','18184374193032764','18189864277360318','18199517644349958','18200183935327356',
+  '18203870626328235','18314817925282381','18318249643257665','18323435203248818','18331135531220547',
+  '18336177418169931','18338486635174317','18359506786231668','18365030110227889','18371549125134232',
+  '18380449177144996','18398476858118541','18401927545113762','18406087546177291','18412797496120042',
+  '18448728343116561','18451488358106382','18454923889097900','18462425467101663','18513597760076058',
+  '18544620979048642','18546304465071106','18547765888027765','18574034140055206','18589524406007985',
+  '18596014447047822',
 ].map(n => `/posts/${n}.jpg`);
 
-/* ===== TRACK 3 — Posts batch 2: 120 images (left → right) ===== */
-const TRACK_3_IMAGES = [
-  '18043589045738050','18048420086443603','18050972147708282','18051136373702642','18052797667200869',
-  '18057653474465102','18060821554179132','18060920771558194','18064745795565922','18065458555893940',
-  '18065548718427832','18068247757241581','18068368310477578','18072155702414346','18073202564282482',
-  '18075411077549017','18077942039424666','18080412329164154','18081087634924311','18081444677413683',
-  '18083979317458661','18084217021151008','18084293156591509','18085299697801893','18085790998982186',
-  '18086452100327781','18087410312520085','18088089515043418','18088430270225194','18088631563794873',
-  '18088705246835231','18088756703142249','18089388631162441','18089395466272775','18089539360834725',
-  '18090320638583903','18090536828520886','18090562067136858','18091550048265884','18091610870128336',
-  '18091667755748825','18092160907872722','18092449127039682','18092656006858961','18092765594599952',
-  '18092937487530484','18093412627529208','18093483104044780','18093533197105338','18093646786912548',
-  '18096588871886658','18096983806779423','18097888702506531','18098292010830329','18100435769051309',
-  '18100727384088895','18100879795997228','18101128567946467','18101728741620952','18102472406480153',
-  '18102834829071113','18103008688737629','18103167542077885','18106141585641319','18106824487673943',
-  '18106842058780454','18108141649837725','18109376599835177','18111086020696076','18112305520742176',
-  '18113332273710233','18113788324699962','18115235050606606','18116006137727794','18116464624570306',
-  '18117254611557534','18117660151726951','18117756415672088','18118486045563967','18120765295550034',
-  '18121087234492965','18121977166636796','18123243571525079','18123581353004510','18124415413721079',
-  '18126884371494101','18127431967149085','18128986672494448','18129608455605670','18129878932544283',
-  '18131372941551137','18134145847478177','18134558647502855','18145916023488183','18151718410470274',
-  '18153532555422064','18160224553427035','18161971708426505','18167488198410806','18183295339324181',
-  '18184374193032764','18189864277360318','18199517644349958','18200183935327356','18203870626328235',
-  '18314817925282381','18318249643257665','18323435203248818','18331135531220547','18336177418169931',
-  '18338486635174317','18359506786231668','18365030110227889','18371549125134232','18380449177144996',
-  '18398476858118541','18401927545113762','18406087546177291','18412797496120042','18448728343116561',
-  '18451488358106382','18454923889097900','18462425467101663','18513597760076058','18544620979048642',
-  '18546304465071106','18547765888027765','18574034140055206','18589524406007985','18596014447047822',
-].map(n => `/posts/${n}.jpg`);
+/* ===== Distribuição equilibrada: ~80 posts por trilho ===== */
+const BATCH_SIZE = Math.ceil(ALL_POSTS.length / 3);
+const POSTS_BATCH_1 = ALL_POSTS.slice(0, BATCH_SIZE);
+const POSTS_BATCH_2 = ALL_POSTS.slice(BATCH_SIZE, BATCH_SIZE * 2);
+const POSTS_BATCH_3 = ALL_POSTS.slice(BATCH_SIZE * 2);
+
+/* Track 1: 20 curated cards + ~80 posts = ~100 items (LTR) */
+const TRACK_1_IMAGES = [...CURATED_CARDS, ...POSTS_BATCH_1];
+/* Track 2: ~80 posts (RTL) */
+const TRACK_2_IMAGES = POSTS_BATCH_2;
+/* Track 3: ~81 posts (LTR) */
+const TRACK_3_IMAGES = POSTS_BATCH_3;
 
 const CARD_W = 200;
 const GAP = 16;
 
-/* ===== Reusable marquee track component ===== */
-const MarqueeTrack = ({ images, direction = 'ltr', speed = 60, trackId, selectedCardId, onCardClick }) => {
-  // The track contains 2 sets of images for an infinite loop.
-  // The animation shifts the track by exactly 1 set's width.
-  const setWidth = images.length * (CARD_W + GAP);
-  const animName = `marquee-${trackId}`;
+/* ===== Pre-calculate set widths ===== */
+const TRACK_1_SET_W = TRACK_1_IMAGES.length * (CARD_W + GAP);
+const TRACK_2_SET_W = TRACK_2_IMAGES.length * (CARD_W + GAP);
+const TRACK_3_SET_W = TRACK_3_IMAGES.length * (CARD_W + GAP);
 
-  // ltr = cards visually move left-to-right (track slides right)
-  // rtl = cards visually move right-to-left (track slides left)
-  const isLTR = direction === 'ltr';
+/* ===== Reusable marquee track component ===== */
+const MarqueeTrack = ({ images, speed = 60, trackId, selectedCardId, onCardClick, isInView }) => {
+  const animName = `marquee-${trackId}`;
 
   return (
     <div className="marquee-container">
-      <style>{`
-        @keyframes ${animName} {
-          0%   { transform: translateX(0px); }
-          100% { transform: translateX(-${setWidth}px); }
-        }
-      `}</style>
       <div
         className={`marquee-track ${selectedCardId ? 'paused' : ''}`}
-        style={{ 
-          animation: `${animName} ${speed}s linear infinite`,
-          animationDirection: isLTR ? 'reverse' : 'normal'
-        }}
+        style={{ animation: `${animName} ${speed}s linear infinite` }}
       >
         {[...images, ...images].map((item, i) => {
           const isSimple = typeof item === 'string';
           const src = isSimple ? item : item.src;
-          const id = isSimple ? `${trackId}-${i}` : item.id;
+          const id  = isSimple ? `${trackId}-${i}` : `${item.id}-${i}`;
           const isSelected = selectedCardId === id;
 
           return (
             <div
-              key={`${id}-${i}`}
+              key={`${trackId}-${i}`}
               className={`marquee-card ${isSelected ? 'selected' : ''}`}
               onClick={() => onCardClick(id, isSimple ? null : item)}
             >
-              <img src={src} alt="Portal Rush Brasil" loading="lazy" />
+              {isInView && (
+                <img src={src} alt="Portal Rush Brasil" loading="lazy" decoding="async" />
+              )}
               <AnimatePresence>
                 {isSelected && !isSimple && (
                   <motion.div
@@ -155,6 +155,8 @@ const MarqueeTrack = ({ images, direction = 'ltr', speed = 60, trackId, selected
 export const CardCarousel = () => {
   const [selectedCardId, setSelectedCardId] = useState(null);
   const resumeTimerRef = useRef(null);
+  const carouselRef = useRef(null);
+  const isInView = useInView(carouselRef, { once: true, margin: "600px 0px" });
 
   const handleCardClick = (id, _item) => {
     if (selectedCardId === id) {
@@ -170,12 +172,30 @@ export const CardCarousel = () => {
   };
 
   return (
-    <section className="interactive-carousel-section" id="carousel">
+    <section className="interactive-carousel-section" id="carousel" ref={carouselRef}>
       <style>{`
+        /* ===== KEYFRAMES — Centralizados no componente pai ===== */
+        /* Track 1 (LTR): cards viajam visualmente da esquerda para direita */
+        @keyframes marquee-track1 {
+          from { transform: translateX(-${TRACK_1_SET_W}px); }
+          to   { transform: translateX(0px); }
+        }
+        /* Track 2 (RTL): cards viajam visualmente da direita para esquerda */
+        @keyframes marquee-track2 {
+          from { transform: translateX(0px); }
+          to   { transform: translateX(-${TRACK_2_SET_W}px); }
+        }
+        /* Track 3 (LTR): cards viajam visualmente da esquerda para direita */
+        @keyframes marquee-track3 {
+          from { transform: translateX(-${TRACK_3_SET_W}px); }
+          to   { transform: translateX(0px); }
+        }
+
         .marquee-container {
           overflow: hidden;
           width: 100%;
           position: relative;
+          z-index: 1;
           mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
           -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
           padding: 6px 0;
@@ -192,12 +212,16 @@ export const CardCarousel = () => {
         .marquee-card {
           flex-shrink: 0;
           width: ${CARD_W}px;
+          height: 260px;
           border-radius: 0.75rem;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
           position: relative;
           opacity: 0.7;
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
         }
         .marquee-card:hover {
           opacity: 1;
@@ -243,34 +267,32 @@ export const CardCarousel = () => {
       `}</style>
 
       <div className="triple-carousel-wrapper">
-        {/* Track 1: left → right — curated cards with info on click */}
+        {/* Track 1: LTR — 20 curated cards + ~80 posts */}
         <MarqueeTrack
-          images={TRACK_1_DATA}
-          direction="ltr"
-          speed={80}
+          images={TRACK_1_IMAGES}
+          speed={100}
           trackId="track1"
           selectedCardId={selectedCardId}
           onCardClick={handleCardClick}
+          isInView={isInView}
         />
-
-        {/* Track 2: right → left — posts batch 1 (121 images) */}
+        {/* Track 2: RTL — ~80 posts */}
         <MarqueeTrack
           images={TRACK_2_IMAGES}
-          direction="rtl"
           speed={120}
           trackId="track2"
           selectedCardId={selectedCardId}
           onCardClick={handleCardClick}
+          isInView={isInView}
         />
-
-        {/* Track 3: left → right — posts batch 2 (120 images) */}
+        {/* Track 3: LTR — ~81 posts */}
         <MarqueeTrack
           images={TRACK_3_IMAGES}
-          direction="ltr"
           speed={130}
           trackId="track3"
           selectedCardId={selectedCardId}
           onCardClick={handleCardClick}
+          isInView={isInView}
         />
       </div>
     </section>
