@@ -550,7 +550,6 @@ const App = () => {
           </div>
           <div className="footer-bottom">
             <span>{t.footerCopyright}</span>
-            <span>{t.footerDisclaimer}</span>
           </div>
         </div>
       </footer>

@@ -281,17 +281,17 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <h3 className="reward-quote">
-              “Você provavelmente me conhece como Geddy Lee, mas meu nome de batismo é Gershon Eliezer Weinrib.”
+              {t.easterEggRewardQuote}
             </h3>
             <div className="reward-video-wrapper">
               <iframe src="https://www.youtube.com/embed/8WYWcGOGwog?autoplay=1" title="Geddy Lee Fan Question" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
             <div className="reward-banner-belas-letras">
               <div className="banner-text">
-                <h4>My Effin' Life - A autobiografia de Geddy Lee</h4>
-                <p>O Portal Rush Brasil e a Editora Belas Letras liberaram <strong>10% de Desconto</strong> para você!</p>
+                <h4>{t.easterEggRewardTitle}</h4>
+                <p>{t.easterEggRewardDesc}</p>
               </div>
-              <div className="banner-coupon"><span>CUPOM:</span><strong>PORTALRUSH10</strong></div>
+              <div className="banner-coupon"><span>{t.easterEggCouponLabel}</span><strong>PORTALRUSH10</strong></div>
             </div>
           </motion.div>
         )}

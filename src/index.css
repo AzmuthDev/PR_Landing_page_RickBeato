@@ -319,7 +319,7 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-subtitle-sub {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
   font-style: italic;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   font-weight: 400;

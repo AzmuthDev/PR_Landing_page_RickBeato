@@ -93,13 +93,22 @@ export const translations = {
     easterEggDebugToggle: "Modo de Depuração (Bordas)",
     easterEggSuccess: "Sucesso! O segredo de GERSHON foi revelado. Veja o novo vídeo no topo da página!",
     easterEggHint: "Pista: Diga meu nome.",
+    easterEggRewardQuote: "“Você provavelmente me conhece como Geddy Lee, mas meu nome de batismo é Gershon Eliezer Weinrib.”",
+    easterEggRewardTitle: "My Effin' Life - A autobiografia de Geddy Lee",
+    easterEggRewardDesc: <>O Portal Rush Brasil e a Editora Belas Letras liberaram <strong>10% de Desconto</strong> para você!</>,
+    easterEggCouponLabel: "CUPOM:",
   },
   en: {
     navAEntrevista: "The Interview",
     navONovoCapitulo: "The New Chapter",
     navLivro: "My Effin' Life",
-    heroTitle: "Geddy Lee interviewed on Rick Beato",
-    heroSubtitle: <>We picked <strong className="hero-subtitle-number">7</strong> COMMENTED topics you<br />should watch in this interview.</>,
+    heroTitle: <><span className="highlight-member">Geddy Lee</span> interviewed on <span className="highlight-tanios">Rick Beato</span></>,
+    heroSubtitle: (
+      <div className="hero-subtitle-container">
+        <span className="hero-subtitle-main">We picked <strong className="hero-subtitle-number">7</strong> COMMENTED topics</span>
+        <span className="hero-subtitle-sub">you should watch in this interview.</span>
+      </div>
+    ),
     collapseHint: "Collapse",
     
     // Cards
@@ -181,13 +190,22 @@ export const translations = {
     easterEggDebugToggle: "Debug Mode (Borders)",
     easterEggSuccess: "Success! The secret of GERSHON has been revealed. Check the new video at the top of the page!",
     easterEggHint: "Hint: Say My Name.",
+    easterEggRewardQuote: "“You probably know me as Geddy Lee, but my given name is Gershon Eliezer Weinrib.”",
+    easterEggRewardTitle: "My Effin' Life - Geddy Lee's Autobiography",
+    easterEggRewardDesc: <>Portal Rush Brasil and Belas Letras Publisher have released a <strong>10% Discount</strong> for you!</>,
+    easterEggCouponLabel: "COUPON:",
   },
   es: {
     navAEntrevista: "La Entrevista",
     navONovoCapitulo: "El Nuevo Capítulo",
     navLivro: "My Effin' Life",
-    heroTitle: "Geddy Lee entrevistado en Rick Beato",
-    heroSubtitle: <>Elegimos <strong className="hero-subtitle-number">7</strong> Temas COMENTADOS que deberías<br />ver en esta entrevista.</>,
+    heroTitle: <><span className="highlight-member">Geddy Lee</span> entrevistado en <span className="highlight-tanios">Rick Beato</span></>,
+    heroSubtitle: (
+      <div className="hero-subtitle-container">
+        <span className="hero-subtitle-main">Elegimos <strong className="hero-subtitle-number">7</strong> Temas COMENTADOS</span>
+        <span className="hero-subtitle-sub">que deberías ver en esta entrevista.</span>
+      </div>
+    ),
     collapseHint: "Ocultar",
     
     // Cards
@@ -269,5 +287,9 @@ export const translations = {
     easterEggDebugToggle: "Modo de Depuración (Bordes)",
     easterEggSuccess: "¡Éxito! El secreto de GERSHON ha sido revelado. ¡Mira el nuevo video en la parte superior de la página!",
     easterEggHint: "Pista: Di mi nombre.",
+    easterEggRewardQuote: "“Probablemente me conozcas como Geddy Lee, pero mi nombre de pila es Gershon Eliezer Weinrib.”",
+    easterEggRewardTitle: "My Effin' Life - La autobiografía de Geddy Lee",
+    easterEggRewardDesc: <>¡Portal Rush Brasil y la Editorial Belas Letras han liberado un <strong>10% de Descuento</strong> para ti!</>,
+    easterEggCouponLabel: "CUPÓN:",
   }
 };
