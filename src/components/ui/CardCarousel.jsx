@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback, memo } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 
@@ -92,107 +92,136 @@ const TRACK_2_IMAGES = POSTS_BATCH_2;
 /* Track 3: ~81 posts (LTR) */
 const TRACK_3_IMAGES = POSTS_BATCH_3;
 
-const CARD_W = 200;
+const CARD_W = 170;
+const CARD_H = 230;
 const GAP = 16;
 
-/* ===== Pre-calculate set widths ===== */
-/* Em flex com gap, item N começa em N*(CARD_W+GAP). Esse é o translateX exato para loop perfeito. */
-const TRACK_1_SET_W = TRACK_1_IMAGES.length * (CARD_W + GAP);
-const TRACK_2_SET_W = TRACK_2_IMAGES.length * (CARD_W + GAP);
-const TRACK_3_SET_W = TRACK_3_IMAGES.length * (CARD_W + GAP);
-
-/* ===== Reusable marquee track component ===== */
-const MarqueeTrack = ({ images, speed = 60, trackId, selectedCardId, onCardClick, isInView }) => {
-  const animName = `marquee-${trackId}`;
+/* ===== Memoized individual card — avoids re-render of all 600 cards on click ===== */
+const MarqueeCard = memo(({ itemData, cardId, isSelected, shouldLoadImage, onClick }) => {
+  const isSimple = typeof itemData === 'string';
+  const src = isSimple ? itemData : itemData.src;
 
   return (
-    <div className="marquee-container">
+    <div
+      className={`mq-card ${isSelected ? 'mq-card--selected' : ''}`}
+      onClick={onClick}
+    >
+      {shouldLoadImage ? (
+        <img src={src} alt="Portal Rush Brasil" decoding="async" />
+      ) : (
+        <div className="mq-card-placeholder" />
+      )}
+      <AnimatePresence>
+        {isSelected && !isSimple && (
+          <motion.div
+            className="mq-card-info"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.25 }}
+          >
+            <p className="mq-info-title">{itemData.topTitle}</p>
+            <p className="mq-info-desc">{itemData.description}</p>
+            {itemData.link && itemData.link !== '#' && (
+              <a href={itemData.link} target="_blank" rel="noopener noreferrer" className="mq-info-link" onClick={(e) => e.stopPropagation()}>
+                Explore History <ExternalLink size={12} />
+              </a>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+});
+MarqueeCard.displayName = 'MarqueeCard';
+
+/* ===== Memoized marquee track with progressive loading ===== */
+const MarqueeTrack = memo(({ images, speed, direction, trackId, selectedCardId, onCardClick, canLoad, canLoadDupe }) => {
+  /* Doubled array for seamless loop */
+  const doubled = [...images, ...images];
+
+  /* Animation class based on direction */
+  const animClass = direction === 'rtl' ? 'mq-track--rtl' : 'mq-track--ltr';
+
+  return (
+    <div className="mq-container">
       <div
-        className={`marquee-track ${selectedCardId ? 'paused' : ''}`}
-        style={{ animation: `${animName} ${speed}s linear infinite` }}
+        className={`mq-track ${animClass} ${selectedCardId ? 'mq-track--paused' : ''}`}
+        style={{ '--mq-speed': `${speed}s` }}
       >
-        {[...images, ...images].map((item, i) => {
+        {doubled.map((item, i) => {
+          const isDupe = i >= images.length;
+          const shouldLoadImage = canLoad && (!isDupe || canLoadDupe);
           const isSimple = typeof item === 'string';
-          const src = isSimple ? item : item.src;
-          const id  = isSimple ? `${trackId}-${i}` : `${item.id}-${i}`;
+          const id = isSimple ? `${trackId}-${i}` : `${item.id}-${i}`;
           const isSelected = selectedCardId === id;
 
           return (
-            <div
+            <MarqueeCard
               key={`${trackId}-${i}`}
-              className={`marquee-card ${isSelected ? 'selected' : ''}`}
+              itemData={item}
+              cardId={id}
+              isSelected={isSelected}
+              shouldLoadImage={shouldLoadImage}
               onClick={() => onCardClick(id, isSimple ? null : item)}
-            >
-              {isInView && (
-                <img src={src} alt="Portal Rush Brasil" decoding="async" />
-              )}
-              <AnimatePresence>
-                {isSelected && !isSimple && (
-                  <motion.div
-                    className="marquee-card-info"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    <p className="info-title">{item.topTitle}</p>
-                    <p className="info-desc">{item.description}</p>
-                    {item.link && item.link !== '#' && (
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="info-link" onClick={(e) => e.stopPropagation()}>
-                        Explore History <ExternalLink size={12} />
-                      </a>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            />
           );
         })}
       </div>
     </div>
   );
-};
+});
+MarqueeTrack.displayName = 'MarqueeTrack';
 
+/* ===== Main exported component ===== */
 export const CardCarousel = () => {
   const [selectedCardId, setSelectedCardId] = useState(null);
+  const [loadLevel, setLoadLevel] = useState(0);
   const resumeTimerRef = useRef(null);
   const carouselRef = useRef(null);
   const isInView = useInView(carouselRef, { once: true, margin: "600px 0px" });
 
-  const handleCardClick = (id, _item) => {
-    if (selectedCardId === id) {
-      setSelectedCardId(null);
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-      return;
+  useEffect(() => {
+    if (isInView) {
+      setLoadLevel(1);
+      const t1 = setTimeout(() => setLoadLevel(2), 800);
+      const t2 = setTimeout(() => setLoadLevel(3), 1600);
+      const t3 = setTimeout(() => setLoadLevel(4), 3000);
+      return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
     }
-    setSelectedCardId(id);
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-    resumeTimerRef.current = setTimeout(() => {
-      setSelectedCardId(null);
-    }, 8000);
-  };
+  }, [isInView]);
+
+  const handleCardClick = useCallback((id, item) => {
+    if (!item) return; /* Ignore clicks on simple post images */
+
+    setSelectedCardId((prev) => {
+      if (prev === id) {
+        if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+        return null;
+      }
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = setTimeout(() => {
+        setSelectedCardId(null);
+      }, 4000);
+      return id;
+    });
+  }, []);
 
   return (
     <section className="interactive-carousel-section" id="carousel" ref={carouselRef}>
       <style>{`
-        /* ===== KEYFRAMES — Centralizados no componente pai ===== */
-        /* Track 1 (LTR): cards viajam visualmente da esquerda para direita */
-        @keyframes marquee-track1 {
-          from { transform: translateX(-${TRACK_1_SET_W}px); }
-          to   { transform: translateX(0px); }
+        /* ===== KEYFRAMES — Percentage-based for pixel-perfect loop ===== */
+        @keyframes mq-scroll-ltr {
+          from { transform: translate3d(-50%, 0, 0); }
+          to   { transform: translate3d(0, 0, 0); }
         }
-        /* Track 2 (RTL): cards viajam visualmente da direita para esquerda */
-        @keyframes marquee-track2 {
-          from { transform: translateX(0px); }
-          to   { transform: translateX(-${TRACK_2_SET_W}px); }
-        }
-        /* Track 3 (LTR): cards viajam visualmente da esquerda para direita */
-        @keyframes marquee-track3 {
-          from { transform: translateX(-${TRACK_3_SET_W}px); }
-          to   { transform: translateX(0px); }
+        @keyframes mq-scroll-rtl {
+          from { transform: translate3d(0, 0, 0); }
+          to   { transform: translate3d(-50%, 0, 0); }
         }
 
-        .marquee-container {
+        /* ===== Container: clips overflow + fade edges ===== */
+        .mq-container {
           overflow: hidden;
           width: 100%;
           position: relative;
@@ -201,64 +230,87 @@ export const CardCarousel = () => {
           -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
           padding: 6px 0;
         }
-        .marquee-track {
-          display: flex;
+
+        /* ===== Track: the animated strip ===== */
+        .mq-track {
+          display: inline-flex;
           gap: ${GAP}px;
+          padding-right: ${GAP}px;
           width: max-content;
           will-change: transform;
         }
-        .marquee-track.paused {
+        .mq-track--ltr {
+          animation: mq-scroll-ltr var(--mq-speed) linear infinite;
+        }
+        .mq-track--rtl {
+          animation: mq-scroll-rtl var(--mq-speed) linear infinite;
+        }
+        .mq-track--paused {
           animation-play-state: paused !important;
         }
-        .marquee-card {
+
+        /* ===== Card: lightweight box ===== */
+        .mq-card {
           flex-shrink: 0;
           width: ${CARD_W}px;
-          height: 260px;
+          height: ${CARD_H}px;
           border-radius: 0.75rem;
           overflow: hidden;
           cursor: pointer;
-          transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
           position: relative;
           opacity: 0.7;
           background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
+          transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
         }
-        .marquee-card:hover {
+        .mq-card:hover {
           opacity: 1;
         }
-        .marquee-card.selected {
+        .mq-card--selected {
           transform: scale(1.15);
           opacity: 1;
           z-index: 20;
           box-shadow: 0 0 30px rgba(123, 207, 231, 0.4), 0 8px 40px rgba(0,0,0,0.5);
         }
-        .marquee-card img {
+
+        /* ===== Card image ===== */
+        .mq-card img {
           width: 100%;
-          height: 260px;
+          height: ${CARD_H}px;
           object-fit: cover;
           display: block;
           border-radius: 0.75rem;
         }
-        .marquee-card-info {
+
+        /* ===== Placeholder: same size, no image ===== */
+        .mq-card-placeholder {
+          width: 100%;
+          height: ${CARD_H}px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 0.75rem;
+        }
+
+        /* ===== Info overlay (curated cards) ===== */
+        .mq-card-info {
           position: absolute;
           bottom: 0; left: 0; right: 0;
           background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
           padding: 60px 12px 14px 12px;
           border-radius: 0 0 0.75rem 0.75rem;
         }
-        .marquee-card-info .info-title {
+        .mq-info-title {
           font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
           letter-spacing: 0.08em; color: #7bcfe7; margin: 0 0 4px 0;
         }
-        .marquee-card-info .info-desc {
+        .mq-info-desc {
           font-size: 0.7rem; color: rgba(255,255,255,0.85); margin: 0 0 8px 0; line-height: 1.4;
         }
-        .marquee-card-info .info-link {
+        .mq-info-link {
           font-size: 0.7rem; color: #7bcfe7; text-decoration: none;
           display: inline-flex; align-items: center; gap: 4px; font-weight: 600;
         }
-        .marquee-card-info .info-link:hover { text-decoration: underline; }
+        .mq-info-link:hover { text-decoration: underline; }
+
+        /* ===== Wrapper for the 3 tracks ===== */
         .triple-carousel-wrapper {
           display: flex;
           flex-direction: column;
@@ -267,35 +319,43 @@ export const CardCarousel = () => {
         }
       `}</style>
 
-      <div className="triple-carousel-wrapper">
-        {/* Track 1: LTR — 20 curated cards + ~80 posts */}
-        <MarqueeTrack
-          images={TRACK_1_IMAGES}
-          speed={100}
-          trackId="track1"
-          selectedCardId={selectedCardId}
-          onCardClick={handleCardClick}
-          isInView={isInView}
-        />
-        {/* Track 2: RTL — ~80 posts */}
-        <MarqueeTrack
-          images={TRACK_2_IMAGES}
-          speed={120}
-          trackId="track2"
-          selectedCardId={selectedCardId}
-          onCardClick={handleCardClick}
-          isInView={isInView}
-        />
-        {/* Track 3: LTR — ~81 posts */}
-        <MarqueeTrack
-          images={TRACK_3_IMAGES}
-          speed={130}
-          trackId="track3"
-          selectedCardId={selectedCardId}
-          onCardClick={handleCardClick}
-          isInView={isInView}
-        />
-      </div>
+      {isInView && (
+        <div className="triple-carousel-wrapper">
+          {/* Track 1: LTR — 20 curated cards + ~80 posts */}
+          <MarqueeTrack
+            images={TRACK_1_IMAGES}
+            speed={180}
+            direction="ltr"
+            trackId="track1"
+            selectedCardId={selectedCardId}
+            onCardClick={handleCardClick}
+            canLoad={loadLevel >= 1}
+            canLoadDupe={loadLevel >= 4}
+          />
+          {/* Track 2: RTL — ~80 posts */}
+          <MarqueeTrack
+            images={TRACK_2_IMAGES}
+            speed={200}
+            direction="rtl"
+            trackId="track2"
+            selectedCardId={selectedCardId}
+            onCardClick={handleCardClick}
+            canLoad={loadLevel >= 2}
+            canLoadDupe={loadLevel >= 4}
+          />
+          {/* Track 3: LTR — ~81 posts */}
+          <MarqueeTrack
+            images={TRACK_3_IMAGES}
+            speed={220}
+            direction="ltr"
+            trackId="track3"
+            selectedCardId={selectedCardId}
+            onCardClick={handleCardClick}
+            canLoad={loadLevel >= 3}
+            canLoadDupe={loadLevel >= 4}
+          />
+        </div>
+      )}
     </section>
   );
 };

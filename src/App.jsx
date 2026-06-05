@@ -8,7 +8,10 @@ import {
   AudioWaveform,
   Drum,
   Zap,
-  Coffee
+  Coffee,
+  Menu,
+  X,
+  Globe
 } from 'lucide-react';
 import { Floating3DWrapper } from './components/ui/3d-card';
 import { BuyMeCoffeeCard } from './components/ui/buy-me-coffee-card';
@@ -172,6 +175,8 @@ const HolographicImage = ({ src, alt }) => {
 
 const App = () => {
   const [language, setLanguage] = useState('pt');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const [expandedTopic, setExpandedTopic] = useState(null);
   const [videoStart, setVideoStart] = useState(null);
   const [isEasterEggActive, setIsEasterEggActive] = useState(false);
@@ -187,7 +192,7 @@ const App = () => {
   const t = translations[language];
   const topics = getTopics(t);
 
-  const handleCardClick = (topic) => {
+  const handleCardClick = (topic, event) => {
     // Record click history for Easter Egg
     const newSequence = [...clickSequence.current, topic.id].slice(-4);
     clickSequence.current = newSequence;
@@ -200,6 +205,18 @@ const App = () => {
     }
 
     const isClosing = expandedTopic === topic.id;
+    
+    if (isClosing && event) {
+      const cardElement = event.currentTarget;
+      const y = cardElement.getBoundingClientRect().top + window.scrollY - 120;
+      
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      
+      setTimeout(() => {
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }, 350);
+    }
+    
     setExpandedTopic(isClosing ? null : topic.id);
     if (!isClosing) {
       setVideoStart(topic.videoStart);
@@ -219,21 +236,61 @@ const App = () => {
       {/* ===== NAVIGATION ===== */}
       <nav className="navbar">
         <div className="nav-inner">
-          <a href="https://portalrushbrasil.com.br/" target="_blank" rel="noopener noreferrer" className="nav-logo">
-            <img src="/logo_portalrush.png" alt="Portal Rush Brasil" className="nav-logo-img" />
-          </a>
-          <div className="nav-links">
-            <a href="#grid">{t.navAEntrevista}</a>
-            <a href="#anika">{t.navONovoCapitulo}</a>
-            <a href="#livro">{t.navLivro}</a>
-            <div className="language-switcher">
-              <button className={language === 'pt' ? 'active' : ''} onClick={() => setLanguage('pt')}>PT</button>
-              <button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')}>EN</button>
-              <button className={language === 'es' ? 'active' : ''} onClick={() => setLanguage('es')}>ES</button>
+          <div className="nav-left">
+            <button className="nav-icon-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+          
+          <div className="nav-center">
+            <a href="https://portalrushbrasil.com.br/" target="_blank" rel="noopener noreferrer" className="nav-logo">
+              <img src="/logo_portalrush.png" alt="Portal Rush Brasil" className="nav-logo-img" />
+            </a>
+          </div>
+
+          <div className="nav-right">
+            <div className="language-dropdown-container">
+              <button className="nav-icon-btn lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
+                <Globe size={24} />
+                <span className="lang-text">{language.toUpperCase()}</span>
+              </button>
+              <AnimatePresence>
+                {isLangOpen && (
+                  <motion.div 
+                    className="lang-dropdown"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <button className={language === 'pt' ? 'active' : ''} onClick={() => { setLanguage('pt'); setIsLangOpen(false); }}>PT</button>
+                    <button className={language === 'en' ? 'active' : ''} onClick={() => { setLanguage('en'); setIsLangOpen(false); }}>EN</button>
+                    <button className={language === 'es' ? 'active' : ''} onClick={() => { setLanguage('es'); setIsLangOpen(false); }}>ES</button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
       </nav>
+
+      {/* ===== MOBILE/FULLSCREEN MENU ===== */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            className="fullscreen-menu"
+            initial={{ opacity: 0, x: '-100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '-100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+          >
+            <div className="fullscreen-menu-links">
+              <a href="#grid" onClick={() => setIsMenuOpen(false)}>{t.navAEntrevista}</a>
+              <a href="#anika" onClick={() => setIsMenuOpen(false)}>{t.navONovoCapitulo}</a>
+              <a href="#livro" onClick={() => setIsMenuOpen(false)}>{t.navLivro}</a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ===== BACKGROUND IMAGE ===== */}
       <div className="bento-bg">
@@ -276,7 +333,7 @@ const App = () => {
                 <div key={topic.id} className="accordion-item">
                   <div
                     className={`interactive-topic-card ${isExpanded ? 'card-active' : ''}`}
-                    onClick={() => handleCardClick(topic)}
+                    onClick={(e) => handleCardClick(topic, e)}
                   >
                     {/* Collapsed: thin horizontal strip */}
                     <div className="topic-card-row">
