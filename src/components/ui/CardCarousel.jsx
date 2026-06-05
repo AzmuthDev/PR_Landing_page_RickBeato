@@ -184,9 +184,10 @@ export const CardCarousel = () => {
   useEffect(() => {
     if (isInView) {
       setLoadLevel(1);
-      const t1 = setTimeout(() => setLoadLevel(2), 800);
-      const t2 = setTimeout(() => setLoadLevel(3), 1600);
-      const t3 = setTimeout(() => setLoadLevel(4), 3000);
+      /* Tempos muito menores agora que as imagens são leves (50KB) */
+      const t1 = setTimeout(() => setLoadLevel(2), 200);
+      const t2 = setTimeout(() => setLoadLevel(3), 400);
+      const t3 = setTimeout(() => setLoadLevel(4), 800);
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
     }
   }, [isInView]);
