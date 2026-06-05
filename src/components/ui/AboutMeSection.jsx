@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 const formatRushText = (text) => {
   if (typeof text !== 'string') return text;
@@ -53,25 +53,29 @@ const aboutMeTexts = [
 
 export const AboutMeSection = ({ t }) => {
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "400px 0px" });
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.25;
     }
-  }, []);
+  }, [isInView]);
 
   return (
-    <section id="RUSH-16-Anos-Alem-do-Improvavel" className="about-me-simple-container">
+    <section id="RUSH-16-Anos-Alem-do-Improvavel" className="about-me-simple-container" ref={containerRef}>
       <div className="about-me-bg-wrapper">
-        <video 
-          ref={videoRef}
-          className="about-me-bg-video" 
-          src="/Timeline_Snakes_&_Arrows_PortalRush.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        ></video>
+        {isInView && (
+          <video 
+            ref={videoRef}
+            className="about-me-bg-video" 
+            src="/Timeline_Snakes_&_Arrows_PortalRush.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+          ></video>
+        )}
         <div className="about-me-overlay"></div>
       </div>
 

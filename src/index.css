@@ -882,7 +882,7 @@ img { max-width: 100%; display: block; }
    ============================================= */
 .about-me-simple-container {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -890,6 +890,13 @@ img { max-width: 100%; display: block; }
   padding: 80px 24px;
   overflow: hidden;
   background-color: #050505;
+}
+
+@media (max-width: 767px) {
+  .about-me-simple-container {
+    padding: 40px 16px;
+    height: auto;
+  }
 }
 
 .about-me-bg-wrapper {
@@ -2494,5 +2501,91 @@ img { max-width: 100%; display: block; }
   .carousel-card-bottom-box {
     width: 100%;
     bottom: -110px;
+  }
+}
+
+/* =============================================
+   MOBILE RESPONSIVENESS OVERRIDES E FOOTER
+   ============================================= */
+.nav-links {
+  display: flex !important;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nav-inner {
+    flex-direction: column;
+    padding: 10px;
+    height: auto !important;
+    gap: 12px;
+  }
+  .nav-links {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    justify-content: flex-start;
+  }
+  .topic-card-title {
+    font-size: 15px !important;
+  }
+  .topic-card-row {
+    padding-right: 12px !important;
+  }
+  .bento-hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+  }
+  .hero-main-layout {
+    padding: 20px 16px !important;
+    gap: 20px !important;
+  }
+  .about-me-simple-container {
+    padding: 60px 16px !important;
+    height: auto !important;
+  }
+  .about-me-story-box {
+    max-height: none !important;
+    padding: 24px 16px !important;
+  }
+  .about-me-photo {
+    max-height: 40vh !important;
+  }
+}
+
+/* --- Footer Banners Container --- */
+.footer-banners-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  gap: 0;
+}
+
+.footer-banner-link {
+  display: block;
+  width: 20%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .footer-banners-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .footer-banners-container::-webkit-scrollbar {
+    height: 4px;
+  }
+  .footer-banners-container::-webkit-scrollbar-thumb {
+    background: rgba(200, 189, 165, 0.4);
+    border-radius: 4px;
+  }
+  .footer-banner-link {
+    width: 45%;
+    scroll-snap-align: start;
   }
 }

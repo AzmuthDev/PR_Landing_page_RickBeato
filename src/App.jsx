@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   ChevronUp,
   Guitar,
@@ -178,6 +178,12 @@ const App = () => {
   const [isGershonActive, setIsGershonActive] = useState(false);
   const clickSequence = useRef([]);
 
+  const anikaRef = useRef(null);
+  const isAnikaInView = useInView(anikaRef, { once: true, margin: "400px 0px" });
+
+  const footerRef = useRef(null);
+  const isFooterInView = useInView(footerRef, { once: true, margin: "400px 0px" });
+
   const t = translations[language];
   const topics = getTopics(t);
 
@@ -238,7 +244,7 @@ const App = () => {
       {/* ===== HERO + DASHBOARD SECTION ===== */}
       <section className="dashboard-section" id="grid">
         <a href="https://buymeacoffee.com/portalrush" target="_blank" rel="noopener noreferrer" className="hero-bmc-btn-floating">
-          <img src="/imgi_17_buy-me-a-coffee.png" alt="Buy Me A Coffee" />
+          <img src="/imgi_17_buy-me-a-coffee.png" alt="Buy Me A Coffee" loading="lazy" />
         </a>
         <div className="bento-hero">
           <h1>{t.heroTitle}</h1>
@@ -257,6 +263,7 @@ const App = () => {
                 title="Geddy Lee & Alex Lifeson — Rick Beato Interview"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                loading="lazy"
               ></iframe>
             </div>
           </div>
@@ -322,12 +329,14 @@ const App = () => {
       </section>
 
       {/* ===== ANIKA NILLES SECTION (DW DRUMS STYLE) ===== */}
-      <section className="anika-dw-section" id="anika" style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111' }}>
+      <section className="anika-dw-section" id="anika" ref={anikaRef} style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111' }}>
         {/* Video Background Mask */}
         <div className="anika-video-mask">
-          <video autoPlay loop muted playsInline className="anika-bg-video">
-            <source src="/anika-bg-video.mp4" type="video/mp4" />
-          </video>
+          {isAnikaInView && (
+            <video autoPlay loop muted playsInline className="anika-bg-video">
+              <source src="/anika-bg-video.mp4" type="video/mp4" />
+            </video>
+          )}
           <div className="anika-video-overlay"></div>
         </div>
 
@@ -422,15 +431,17 @@ const App = () => {
 
 
       {/* ===== SUPPORT & FOOTER SECTION ===== */}
-      <footer className="footer">
-        <video 
-          className="footer-video-bg" 
-          src="/Banner_Animado_Desktop.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-        ></video>
+      <footer className="footer" ref={footerRef}>
+        {isFooterInView && (
+          <video 
+            className="footer-video-bg" 
+            src="/Banner_Animado_Desktop.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+          ></video>
+        )}
         <div className="footer-video-overlay"></div>
 
         <div className="footer-content-wrapper" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "60px", position: "relative", zIndex: 2 }}>
@@ -447,7 +458,7 @@ const App = () => {
               15 anos de conteúdos sobre o RUSH
             </p>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', width: '100vw', marginLeft: 'calc(-50vw + 50%)', gap: 0 }}>
+          <div className="footer-banners-container">
             {[
               { num: 1, href: 'https://www.camisasdorush.com.br/colecoes/geddy-lee/' },
               { num: 2, href: 'https://www.camisasdorush.com.br/colecoes/neil-peart/' },
@@ -455,11 +466,11 @@ const App = () => {
               { num: 4, href: 'https://www.camisasdorush.com.br/colecoes/albuns/' },
               { num: 5, href: 'https://www.camisasdorush.com.br/colecoes/minimalista/' },
             ].map(({ num, href }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer" key={num} style={{ display: 'block', width: '20%', aspectRatio: '1 / 1', overflow: 'hidden', flexShrink: 0, position: 'relative' }}
+              <a href={href} target="_blank" rel="noopener noreferrer" key={num} className="footer-banner-link"
                 onMouseEnter={(e) => { e.currentTarget.querySelector('img').style.transform = 'scale(1.05)'; }}
                 onMouseLeave={(e) => { e.currentTarget.querySelector('img').style.transform = 'scale(1)'; }}
               >
-                <img src={`/banner-${num}.webp`} alt={`Coleção ${num}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }} />
+                <img src={`/banner-${num}.webp`} alt={`Coleção ${num}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }} />
               </a>
             ))}
           </div>
@@ -495,7 +506,7 @@ const App = () => {
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
       >
-        <img src="/whatsapp-icon.png" alt="WhatsApp" />
+        <img src="/whatsapp-icon.png" alt="WhatsApp" loading="lazy" />
       </a>
 
     </>
