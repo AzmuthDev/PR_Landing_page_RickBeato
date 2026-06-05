@@ -97,7 +97,7 @@ const CARD_H = 230;
 const GAP = 16;
 
 /* ===== Memoized individual card — avoids re-render of all 600 cards on click ===== */
-const MarqueeCard = memo(({ itemData, cardId, isSelected, shouldLoadImage, onClick }) => {
+const MarqueeCard = memo(({ itemData, cardId, isSelected, shouldLoadImage, isPriority, onClick }) => {
   const isSimple = typeof itemData === 'string';
   const src = isSimple ? itemData : itemData.src;
 
@@ -107,7 +107,7 @@ const MarqueeCard = memo(({ itemData, cardId, isSelected, shouldLoadImage, onCli
       onClick={onClick}
     >
       {shouldLoadImage ? (
-        <img src={src} alt="Portal Rush Brasil" decoding="async" />
+        <img src={src} alt="Portal Rush Brasil" decoding="async" loading={isPriority ? "eager" : "lazy"} />
       ) : (
         <div className="mq-card-placeholder" />
       )}
@@ -156,6 +156,13 @@ const MarqueeTrack = memo(({ images, speed, direction, trackId, selectedCardId, 
           const id = isSimple ? `${trackId}-${i}` : `${item.id}-${i}`;
           const isSelected = selectedCardId === id;
 
+          let isPriority = false;
+          if (direction === 'rtl') {
+            isPriority = i < 15;
+          } else {
+            isPriority = isDupe && (i - images.length) < 15;
+          }
+
           return (
             <MarqueeCard
               key={`${trackId}-${i}`}
@@ -163,6 +170,7 @@ const MarqueeTrack = memo(({ images, speed, direction, trackId, selectedCardId, 
               cardId={id}
               isSelected={isSelected}
               shouldLoadImage={shouldLoadImage}
+              isPriority={isPriority}
               onClick={() => onCardClick(id, isSimple ? null : item)}
             />
           );
@@ -336,7 +344,7 @@ export const CardCarousel = () => {
           <MarqueeTrack
             images={TRACK_3_IMAGES}
             speed={220}
-            direction="ltr"
+            direction="rtl"
             trackId="track3"
             selectedCardId={selectedCardId}
             onCardClick={handleCardClick}
