@@ -176,21 +176,9 @@ MarqueeTrack.displayName = 'MarqueeTrack';
 /* ===== Main exported component ===== */
 export const CardCarousel = () => {
   const [selectedCardId, setSelectedCardId] = useState(null);
-  const [loadLevel, setLoadLevel] = useState(0);
   const resumeTimerRef = useRef(null);
   const carouselRef = useRef(null);
   const isInView = useInView(carouselRef, { once: true, margin: "600px 0px" });
-
-  useEffect(() => {
-    if (isInView) {
-      setLoadLevel(1);
-      /* Tempos muito menores agora que as imagens são leves (50KB) */
-      const t1 = setTimeout(() => setLoadLevel(2), 200);
-      const t2 = setTimeout(() => setLoadLevel(3), 400);
-      const t3 = setTimeout(() => setLoadLevel(4), 800);
-      return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-    }
-  }, [isInView]);
 
   const handleCardClick = useCallback((id, item) => {
     if (!item) return; /* Ignore clicks on simple post images */
@@ -330,8 +318,8 @@ export const CardCarousel = () => {
             trackId="track1"
             selectedCardId={selectedCardId}
             onCardClick={handleCardClick}
-            canLoad={loadLevel >= 1}
-            canLoadDupe={loadLevel >= 4}
+            canLoad={true}
+            canLoadDupe={true}
           />
           {/* Track 2: RTL — ~80 posts */}
           <MarqueeTrack
@@ -341,8 +329,8 @@ export const CardCarousel = () => {
             trackId="track2"
             selectedCardId={selectedCardId}
             onCardClick={handleCardClick}
-            canLoad={loadLevel >= 2}
-            canLoadDupe={loadLevel >= 4}
+            canLoad={true}
+            canLoadDupe={true}
           />
           {/* Track 3: LTR — ~81 posts */}
           <MarqueeTrack
@@ -352,8 +340,8 @@ export const CardCarousel = () => {
             trackId="track3"
             selectedCardId={selectedCardId}
             onCardClick={handleCardClick}
-            canLoad={loadLevel >= 3}
-            canLoadDupe={loadLevel >= 4}
+            canLoad={true}
+            canLoadDupe={true}
           />
         </div>
       )}
