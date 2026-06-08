@@ -71,6 +71,10 @@ export const translations = {
     bmcDesc: "Se você curte o conteúdo exclusivo que trazemos e quer ajudar a manter o portal no ar, considere nos pagar um café!",
     bmcBtn: "Buy me a Coffee ☕",
 
+    // Pix
+    pixTitle: "Apoie com PIX",
+    pixDesc: "Aponte a câmera do seu celular para doar através do PIX e apoiar o portal.",
+
     // Footer
     footerBrandDesc: 'O projeto definitivo para fãs no Brasil.',
     footerExplore: 'Explore',
@@ -168,6 +172,10 @@ export const translations = {
     bmcDesc: "If you enjoy the exclusive content we bring and want to help keep the portal running, consider buying us a coffee!",
     bmcBtn: "Buy me a Coffee ☕",
 
+    // Pix
+    pixTitle: "Support via PIX",
+    pixDesc: "Point your phone camera to donate via PIX and support the portal.",
+
     // Footer
     footerBrandDesc: 'The ultimate project for fans in Brazil.',
     footerExplore: 'Explore',
@@ -264,6 +272,10 @@ export const translations = {
     bmcTitle: "Apoya a Portal Rush Brasil",
     bmcDesc: "Si disfrutas del contenido exclusivo que traemos y quieres ayudar a mantener el portal en línea, ¡considera pagarnos un café!",
     bmcBtn: "Buy me a Coffee ☕",
+
+    // Pix
+    pixTitle: "Apoya vía PIX",
+    pixDesc: "Apunta la cámara de tu celular para donar vía PIX y apoyar el portal.",
 
     // Footer
     footerBrandDesc: 'El proyecto definitivo para fans en Brasil.',

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Floating3DWrapper } from './components/ui/3d-card';
 import { BuyMeCoffeeCard } from './components/ui/buy-me-coffee-card';
+import { PixCard } from './components/ui/PixCard';
 import { AboutMeSection } from './components/ui/AboutMeSection';
 import { GeddyEasterEgg } from './components/ui/GeddyEasterEgg';
 import { CardCarousel } from './components/ui/CardCarousel';
@@ -507,13 +508,21 @@ const App = () => {
         <div className="footer-video-overlay"></div>
 
         <div className="footer-content-wrapper" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "60px", position: "relative", zIndex: 2 }}>
-          <BuyMeCoffeeCard
-            image="/imgi_17_buy-me-a-coffee.png"
-            coffeeLink="https://buymeacoffee.com/portalrush"
-            title={t.bmcTitle}
-            description={t.bmcDesc}
-            buttonText={t.bmcBtn}
-          />
+          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center", width: "100%", maxWidth: "900px" }}>
+            <BuyMeCoffeeCard
+              image="/imgi_17_buy-me-a-coffee.png"
+              coffeeLink="https://buymeacoffee.com/portalrush"
+              title={t.bmcTitle}
+              description={t.bmcDesc}
+              buttonText={t.bmcBtn}
+            />
+            <PixCard 
+              qrImage="/pix-qrcode.jpeg"
+              bannerImage="/pix-banner.jpg"
+              title={t.pixTitle || "Apoie com PIX"}
+              description={t.pixDesc || "Aponte a câmera do seu celular para doar através do PIX e apoiar o portal."}
+            />
+          </div>
 
           <div style={{ marginTop: '32px', textAlign: 'center', width: '100%' }}>
             <p style={{ color: '#7bcfe7', fontSize: '0.85rem', fontFamily: 'var(--font-body)', letterSpacing: '0.05em', marginBottom: '0', opacity: 0.9, paddingBottom: '16px' }}>
