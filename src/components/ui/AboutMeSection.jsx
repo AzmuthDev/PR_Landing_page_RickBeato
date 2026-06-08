@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const formatRushText = (text) => {
@@ -55,6 +55,7 @@ export const AboutMeSection = ({ t }) => {
   const videoRef = useRef(null);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "400px 0px" });
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -120,11 +121,17 @@ export const AboutMeSection = ({ t }) => {
             <h2 className="about-me-title">
               <span className="highlight-rush" style={{ textTransform: 'none' }}>RUSH:</span> <span className="highlight-tanios">16 Anos Criando <br /> Além do Improvável</span>
             </h2>
-            <div className="about-me-paragraphs">
+            <div className={`about-me-paragraphs ${isExpanded ? 'expanded' : ''}`}>
               {aboutMeTexts.map((text, index) => (
                 <p key={index}>{formatRushText(text)}</p>
               ))}
             </div>
+            <button 
+              className="about-me-expand-btn" 
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Recolher' : 'Expandir'}
+            </button>
             <div className="about-me-author author">
               <span className="highlight-tanios">Tânios Rush Acácio</span> - <span className="highlight-portal">Criador do Portal Rush Brasil</span>
             </div>

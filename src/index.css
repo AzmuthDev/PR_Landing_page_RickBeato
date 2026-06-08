@@ -1010,6 +1010,56 @@ img { max-width: 100%; display: block; }
   margin-bottom: 32px; 
 }
 
+.about-me-expand-btn {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .about-me-paragraphs {
+    max-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about-me-paragraphs.expanded {
+    max-height: none;
+  }
+  
+  .about-me-paragraphs:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(transparent, rgba(20, 20, 20, 0.95) 80%);
+    pointer-events: none;
+  }
+
+  .about-me-expand-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    color: var(--color-beige);
+    border: 1px solid var(--color-beige);
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .about-me-expand-btn:hover {
+    background: var(--color-beige);
+    color: #111;
+  }
+}
+
 .about-me-author {
   font-family: 'SnakesAndArrowsAltBold', sans-serif;
   font-size: clamp(0.95rem, 1.2vw, 1.15rem);
@@ -1127,6 +1177,73 @@ img { max-width: 100%; display: block; }
 
 .bento-card-purple .card-text {
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- Book Banner Adjustments --- */
+.book-banner-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  text-align: left !important;
+}
+
+.book-banner-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.book-banner-content .card-text {
+  margin: 0 0 24px 0;
+  max-width: 100%;
+}
+
+.book-banner-image {
+  flex: 0 0 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-image-transparent {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+  transform: perspective(1000px) rotateY(-15deg) rotateX(5deg) scale(1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(-10px 15px 15px rgba(0, 0, 0, 0.5));
+}
+
+.bento-card-purple:hover .book-image-transparent {
+  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) scale(1.08);
+  filter: drop-shadow(-15px 20px 25px rgba(0, 0, 0, 0.7));
+}
+
+@media (max-width: 768px) {
+  .book-banner-layout {
+    flex-direction: column;
+    text-align: center !important;
+    gap: 24px;
+    padding: 32px 24px;
+  }
+  .book-banner-content {
+    align-items: center;
+  }
+  .book-banner-image {
+    flex: none;
+    width: 100%;
+  }
+  .book-image-transparent {
+    max-width: 240px;
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1);
+  }
+  .bento-card-purple:hover .book-image-transparent {
+    transform: scale(1.05);
+  }
 }
 
 /* --- Card Number Badge --- */

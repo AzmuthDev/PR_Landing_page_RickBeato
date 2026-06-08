@@ -472,15 +472,20 @@ const App = () => {
       {/* ===== CONTEXTUAL BOOK BANNER (MOVED DOWN) ===== */}
       <section className="bento-hero" id="livro" style={{ minHeight: 'auto', padding: '0 5% 4rem 5%', display: 'flex', justifyContent: 'center' }}>
         <div className="bento-grid-footer" style={{ marginTop: 0, width: '100%', maxWidth: '1200px' }}>
-          <div className="bento-card bento-cta bento-card-purple">
-            <span className="card-badge">{t.bonusBadge}</span>
-            <h3 className="card-title">{t.bonusTitle}</h3>
-            <p className="card-text">
-              {t.bonusText1}<strong>"My Effin' Life"</strong>. {t.bonusText2}<strong>Editora Belas Letras</strong>.
-            </p>
-            <a href="https://www.belasletras.com.br/" target="_blank" rel="noopener noreferrer" className="btn-cta-large">
-              {t.bonusBtn}
-            </a>
+          <div className="bento-card bento-cta bento-card-purple book-banner-layout">
+            <div className="book-banner-content">
+              <span className="card-badge">{t.bonusBadge}</span>
+              <h3 className="card-title">{t.bonusTitle}</h3>
+              <p className="card-text">
+                {t.bonusText1}<strong>"My Effin' Life"</strong>. {t.bonusText2}<strong>Editora Belas Letras</strong>.
+              </p>
+              <a href="https://www.belasletras.com.br/" target="_blank" rel="noopener noreferrer" className="btn-cta-large">
+                {t.bonusBtn}
+              </a>
+            </div>
+            <div className="book-banner-image">
+              <img src="/livrosemfundo.png" alt="Livro My Effin' Life" className="book-image-transparent" />
+            </div>
           </div>
         </div>
       </section>
