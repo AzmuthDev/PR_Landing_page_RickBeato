@@ -1,0 +1,90 @@
+.puzzle-modal {
+  position: relative;
+  background-color: rgba(13, 9, 20, 0.85); /* Levemente transparente */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+  margin: 0 auto;
+}
+
+.instruction-text {
+  color: #a8a8b3;
+  text-align: center;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', sans-serif; /* Fonte parecida com a imagem */
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.word-grid {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.letter-box {
+  width: 2.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-family: 'Montserrat', sans-serif; /* Fonte parecida com a imagem */
+  font-size: 1.8rem;
+  font-weight: 900; /* Extra bold */
+  transition: all 0.3s ease;
+}
+
+/* Caixas Atuais (Preenchidas): fundo amarelo dourado e texto amarelo */
+.letter-box.filled {
+  background-color: transparent;
+  border: 2px solid #ffc107;
+  color: #ffc107;
+  text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+  box-shadow: inset 0 0 15px rgba(255, 193, 7, 0.1), 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+/* Caixas Vazias (Slot): borda inferior cinza escura fina */
+.letter-box.empty {
+  background-color: #1a1824;
+  border: 1px solid transparent;
+  border-bottom: 2px solid #3f3f46;
+}
+
+.action-area {
+  display: flex;
+  justify-content: center;
+  min-height: 2.5rem;
+}
+
+.reset-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(139, 35, 38, 0.15); /* Fundo cinza escuro/avermelhado */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #d1d5db;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+.reset-button:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.5);
+}

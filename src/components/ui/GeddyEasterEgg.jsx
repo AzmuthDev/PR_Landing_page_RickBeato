@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { Sparkles, Trash2, Eye, EyeOff, Baby, Guitar } from 'lucide-react';
+import PuzzleBoard from './PuzzleBoard';
 
 const secretCode = ['G', 'E', 'R', 'S', 'H', 'O', 'N'];
 
 // Relative coordinates of the letters on the busto image (in percentage)
 const letterZones = [
-  { letter: 'H', top: '6%', left: '44.5%', width: '9%', height: '7%', startTop: '-15%', startLeft: '30%' },
-  { letter: 'E', top: '19%', left: '23.5%', width: '10%', height: '8%', startTop: '80%', startLeft: '-5%' },
-  { letter: 'G', top: '40.5%', left: '33.5%', width: '10%', height: '8%', startTop: '10%', startLeft: '-10%' },
-  { letter: 'R', top: '34.5%', left: '71.5%', width: '9%', height: '7%', startTop: '-5%', startLeft: '95%' },
-  { letter: 'S', top: '47.5%', left: '64.5%', width: '9%', height: '7%', startTop: '40%', startLeft: '105%' },
-  { letter: 'O', top: '66%', left: '46.5%', width: '9%', height: '7%', startTop: '85%', startLeft: '90%' },
-  { letter: 'N', top: '68%', left: '68.5%', width: '9%', height: '7%', startTop: '90%', startLeft: '20%' }
+  { letter: 'H', top: '4%', left: '48%', width: '10%', height: '8%', startTop: '-15%', startLeft: '30%' },
+  { letter: 'E', top: '18%', left: '26%', width: '14%', height: '12%', startTop: '80%', startLeft: '-5%' },
+  { letter: 'G', top: '40%', left: '36%', width: '14%', height: '12%', startTop: '10%', startLeft: '-10%' },
+  { letter: 'R', top: '37%', left: '76%', width: '10%', height: '8%', startTop: '-5%', startLeft: '95%' },
+  { letter: 'S', top: '51%', left: '68%', width: '10%', height: '8%', startTop: '40%', startLeft: '105%' },
+  { letter: 'O', top: '69%', left: '52%', width: '10%', height: '8%', startTop: '85%', startLeft: '90%' },
+  { letter: 'N', top: '70%', left: '71%', width: '10%', height: '8%', startTop: '90%', startLeft: '20%' }
 ];
 
 export const GeddyEasterEgg = ({ onSuccess, t }) => {
@@ -110,7 +111,7 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
           onClick={handleOutsideClick}
         >
           <img 
-            src="/geddy-busto.png" 
+            src="/geddy-bust-removebg.png" 
             alt="Geddy Lee sliced sculpture" 
           />
 
@@ -175,39 +176,13 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
 
         {/* Right Column: Puzzle Info Panel */}
         <div className="easter-egg-panel">
+          <PuzzleBoard 
+            targetWordLength={7} 
+            clickedLetters={userCode} 
+            onReset={clearSequence} 
+          />
 
-          {/* Spelling indicator */}
-          <div className="easter-egg-spelling">
-            {secretCode.map((letter, idx) => {
-              const isFilled = idx < userCode.length;
-              return (
-                <motion.div
-                  key={idx}
-                  className={`easter-egg-spelling-box ${
-                    successStatus ? 'success' : isFilled ? 'filled' : ''
-                  }`}
-                  animate={isFilled ? { scale: [0.8, 1.2, 1], borderColor: "#FFD700", color: "#FFD700", textShadow: "0 0 10px rgba(255,215,0,0.5)" } : { scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isFilled ? letter : (idx % 2 === 0 ? <Baby size={32} opacity={0.3} strokeWidth={1.5} /> : <img src="/imgi_3_rush-bass-icon.png" alt="Bass" style={{ width: '28px', opacity: 0.4, filter: 'grayscale(100%) brightness(200%)' }} />)}
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Controls */}
-          <div className="easter-egg-controls">
-
-            {userCode.length > 0 && (
-              <button
-                onClick={clearSequence}
-                className="btn-reset"
-              >
-                <Trash2 size={14} />
-                Reset
-              </button>
-            )}
-            
+          <div className="easter-egg-controls mt-6 flex justify-center w-full">
             {showHintButton && !showHintText && (
               <button className="btn-hint" onClick={(e) => { e.stopPropagation(); setShowHintText(true); }}>
                 <Sparkles size={14} /> Pista

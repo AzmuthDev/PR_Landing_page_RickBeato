@@ -1,0 +1,284 @@
+@font-face {
+  font-family: 'Neue Machina';
+  src: url('/rushfonts/NeueMachina-Ultrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RollTheBones';
+  src: url('/rushfonts/RollTheBones.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BeyondTheLightedStage';
+  src: url('/rushfonts/BeyondTheLightedStage.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MovingPictures';
+  src: url('/rushfonts/MovingPictures.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Syrinx';
+  src: url('/rushfonts/Syrinx.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GrandDesignsLined';
+  src: url('/rushfonts/GrandDesignsLined.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'R30';
+  src: url('/rushfonts/R30.ttf') format('truetype');
+}
+
+.hero-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.hero-main-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  line-height: 1;
+}
+
+.title-gradient-lined {
+  font-family: 'R30', sans-serif;
+  font-size: 7.2rem; /* Huge size */
+  font-weight: normal;
+  letter-spacing: 0.02em; /* R30 usually needs slightly more spacing */
+  background: linear-gradient(to right, #5ce1e6 0%, #0084ff 50%, #002aa6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: translateY(-2px); /* Vertical fine-tuning */
+  white-space: nowrap;
+}
+
+.hero-top-subtitle {
+  font-family: 'RollTheBones', sans-serif;
+  color: #e8ddb7;
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+  margin-top: -5px;
+}
+
+.hero-call-text {
+  font-size: 4.8rem;
+  letter-spacing: -0.02em;
+  margin: 35px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.hero-call-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  line-height: 1;
+}
+
+.hero-call-white {
+  font-family: 'BeyondTheLightedStage', sans-serif;
+  color: #ffffff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+}
+
+.hero-call-rush {
+  font-family: 'MovingPictures', sans-serif;
+  color: #ff0000;
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+  font-size: 5.5rem;
+  transform: translateY(-5px);
+}
+
+.hero-guide-text-box {
+  margin-top: 30px;
+  border-left: 3px solid #991a1a;
+  padding-left: 15px;
+  max-width: 850px;
+  font-size: 1.7rem;
+  line-height: 1.8;
+  text-align: left;
+  font-family: 'Syrinx', serif;
+  color: #f2f2f2;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.guide-title {
+  display: block;
+  font-size: 2.8rem;
+  color: #e8ddb7;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.highlight-lines {
+  font-family: 'GrandDesignsLined', sans-serif;
+  color: #2eb8e6;
+  font-size: 2.1rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  top: 3px;
+}
+
+.highlight-yellow {
+  color: #ffe600;
+}
+
+.highlight-blue {
+  color: #0084ff;
+}
+
+.neon-glitch-text {
+  font-family: 'GrandDesignsLined', sans-serif;
+  color: #00f3ff;
+  text-shadow: 0 0 5px #00f3ff, 0 0 10px #00f3ff;
+  animation: crt-text-glitch 2s infinite;
+}
+
+@keyframes crt-text-glitch {
+  0% { text-shadow: 0 0 5px #00f3ff; opacity: 1; }
+  10% { opacity: 0.8; }
+  20% { text-shadow: 2px 0 5px #00f3ff, -2px 0 5px #00f3ff; }
+  30% { opacity: 1; text-shadow: 0 0 5px #00f3ff; }
+  40% { text-shadow: 0 0 5px #00f3ff; }
+  50% { opacity: 0.9; }
+  60% { opacity: 1; }
+  100% { text-shadow: 0 0 5px #00f3ff; opacity: 1; }
+}
+
+/* Container Principal (Theme Notas de Dólar / Green) */
+.big-money-card {
+  background: linear-gradient(135deg, #0d3a1e 0%, #175a32 50%, #0d3a1e 100%);
+  border: 2px solid #2ecc71;
+  box-shadow: 0 8px 30px rgba(46, 204, 113, 0.25), inset 0 0 15px rgba(46, 204, 113, 0.15);
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #eafaf1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* O "Varredor" de Brilho que passa por cima do card (Glance effect) */
+.big-money-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -50%; width: 200%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(46, 204, 113, 0.1), transparent);
+  transform: rotate(35deg);
+  pointer-events: none;
+  animation: shine-sweep 6s infinite linear;
+}
+
+@keyframes shine-sweep {
+  0% { transform: translate(-30%, -30%) rotate(35deg); }
+  100% { transform: translate(30%, 30%) rotate(35deg); }
+}
+
+/* Título THE BIG MONEY */
+.big-money-title {
+  font-family: 'Neue Machina', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2ecc71;
+  text-shadow: 0 0 6px rgba(46, 204, 113, 0.4);
+  text-transform: uppercase;
+  text-align: center;
+  border-bottom: 1px solid rgba(46, 204, 113, 0.2);
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+/* Base da Meta (Os emojis de dinheirinho) */
+.big-money-minimal-scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.scale-label { color: #a2e8c5; }
+.scale-bags { display: flex; gap: 4px; }
+.bag-icon {
+  font-size: 1.1rem;
+  opacity: 0.25;
+  filter: grayscale(100%);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.bag-icon.active {
+  opacity: 1;
+  filter: grayscale(0%) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+.bag-icon:hover { transform: scale(1.2); }
+
+/* Layout em Colunas para os Botões Quadrados */
+.big-money-actions-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.support-action-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.action-label {
+  font-family: 'Neue Machina', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #a2e8c5;
+  letter-spacing: 0.05em;
+}
+
+/* Containers Quadrados Brancos (Buy Me a Coffee e QR Pix) */
+.bmac-link-square, .pix-btn-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  width: 120px;
+  height: 120px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bmac-link-square:hover, .pix-btn-square:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.bmac-link-square img, .pix-btn-square img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}

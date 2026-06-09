@@ -20,7 +20,9 @@ import { AboutMeSection } from './components/ui/AboutMeSection';
 import { GeddyEasterEgg } from './components/ui/GeddyEasterEgg';
 import { CardCarousel } from './components/ui/CardCarousel';
 import { translations } from './translations.jsx';
+import { BigMoneyCard } from './components/ui/BigMoneyCard';
 import './index.css';
+import './hero.css';
 
 const highlightText = (text) => {
   if (typeof text !== 'string') return text;
@@ -301,12 +303,37 @@ const App = () => {
 
       {/* ===== HERO + DASHBOARD SECTION ===== */}
       <section className="dashboard-section" id="grid">
-        <a href="https://buymeacoffee.com/portalrush" target="_blank" rel="noopener noreferrer" className="hero-bmc-btn-floating">
-          <img src="/imgi_17_buy-me-a-coffee.png" alt="Buy Me A Coffee" loading="lazy" />
-        </a>
-        <div className="bento-hero">
-          <h1>{t.heroTitle}</h1>
-          <div className="bento-hero-subtitle">{t.heroSubtitle}</div>
+        <div className="bento-hero" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', textAlign: 'left', zIndex: 10, flexWrap: 'wrap', gap: '2rem' }}>
+          <div className="hero-left-col" style={{ flex: '1 1 500px' }}>
+            <div className="hero-title-wrapper">
+              <h1 className="hero-main-title">
+                <span className="title-gradient-lined">PORTAL RUSH ZINE:</span>
+              </h1>
+              <div className="hero-top-subtitle">PRIMEIRA EDIÇÃO</div>
+            </div>
+            
+            <div className="hero-call-text">
+              <div className="hero-call-row">
+                <span className="hero-call-white">Sua curadoria de</span>
+              </div>
+              <div className="hero-call-row">
+                <span className="hero-call-white">conteúdos do</span>
+                <span className="hero-call-rush">RUSH</span>
+              </div>
+            </div>
+            
+            <div className="hero-guide-text-box">
+              <span className="guide-title">Nesta edição:</span>
+              <span className="highlight-lines">7 tópicos essenciais</span> na entrevista de <br/>
+              <span className="highlight-yellow">Geddy Lee</span> com o produtor <span className="highlight-blue">Rick Beato</span>; novo capítulo <br/>
+              colaborativo sobre <span className="highlight-yellow">Anika Nilles</span>; Game com Easter <br/>
+              Eggs & Puzzle, lojinha do Portal (disponível no Brasil).
+            </div>
+          </div>
+
+          <div className="hero-right-col" style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'flex-end', zIndex: 15 }}>
+            <BigMoneyCard />
+          </div>
         </div>
 
         {/* ===== TWO-COLUMN LAYOUT: VIDEO + SIDE PANEL ===== */}
@@ -509,18 +536,13 @@ const App = () => {
 
         <div className="footer-content-wrapper" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "60px", position: "relative", zIndex: 2 }}>
           <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center", width: "100%", maxWidth: "900px" }}>
-            <BuyMeCoffeeCard
-              image="/imgi_17_buy-me-a-coffee.png"
-              coffeeLink="https://buymeacoffee.com/portalrush"
-              title={t.bmcTitle}
-              description={t.bmcDesc}
-              buttonText={t.bmcBtn}
+            <BuyMeCoffeeCard 
+              image="/imgi_17_buy-me-a-coffee.png" 
+              coffeeLink="https://buymeacoffee.com/portalrushzine" 
             />
             <PixCard 
-              qrImage="/pix-qrcode.jpeg"
-              bannerImage="/pix-banner.jpg"
-              title={t.pixTitle || "Apoie com PIX"}
-              description={t.pixDesc || "Aponte a câmera do seu celular para doar através do PIX e apoiar o portal."}
+              bannerImage="/pix-qrcode.jpeg" 
+              qrImage="/pix-qrcode.jpeg" 
             />
           </div>
 
