@@ -51,26 +51,27 @@
 
 .title-gradient-lined {
   font-family: 'R30', sans-serif;
-  font-size: 7.2rem; /* Huge size */
+  font-size: clamp(3rem, 8vw, 7.2rem); /* Responsive size */
   font-weight: normal;
   letter-spacing: 0.02em; /* R30 usually needs slightly more spacing */
   background: linear-gradient(to right, #5ce1e6 0%, #0084ff 50%, #002aa6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: translateY(-2px); /* Vertical fine-tuning */
-  white-space: nowrap;
+  white-space: normal; /* Changed from nowrap to allow breaking on mobile */
+  word-break: break-word;
 }
 
 .hero-top-subtitle {
   font-family: 'RollTheBones', sans-serif;
   color: #e8ddb7;
-  font-size: 2.2rem;
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
   letter-spacing: 0.05em;
   margin-top: -5px;
 }
 
 .hero-call-text {
-  font-size: 4.8rem;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
   letter-spacing: -0.02em;
   margin: 35px 0;
   display: flex;
@@ -97,7 +98,7 @@
   font-family: 'MovingPictures', sans-serif;
   color: #ff0000;
   text-shadow: 4px 4px 0px rgba(0,0,0,0.8);
-  font-size: 5.5rem;
+  font-size: clamp(3rem, 8vw, 5.5rem);
   transform: translateY(-5px);
 }
 
@@ -106,7 +107,7 @@
   border-left: 3px solid #991a1a;
   padding-left: 15px;
   max-width: 850px;
-  font-size: 1.7rem;
+  font-size: clamp(1.1rem, 3vw, 1.7rem);
   line-height: 1.8;
   text-align: left;
   font-family: 'Syrinx', serif;
@@ -117,7 +118,7 @@
 
 .guide-title {
   display: block;
-  font-size: 2.8rem;
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
   color: #e8ddb7;
   margin-bottom: 5px;
   line-height: 1.2;
@@ -126,7 +127,7 @@
 .highlight-lines {
   font-family: 'GrandDesignsLined', sans-serif;
   color: #2eb8e6;
-  font-size: 2.1rem;
+  font-size: clamp(1.3rem, 3.5vw, 2.1rem);
   letter-spacing: -0.02em;
   position: relative;
   top: 3px;
@@ -281,4 +282,27 @@
   height: 100%;
   object-fit: contain;
   border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .hero-title-wrapper {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-call-text {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-call-row {
+    justify-content: center;
+  }
+  .hero-guide-text-box {
+    text-align: center;
+    border-left: none;
+    border-top: 3px solid #991a1a;
+    padding-left: 0;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

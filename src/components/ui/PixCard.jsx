@@ -43,7 +43,8 @@ export const PixCard = ({
           borderRef.current.style.setProperty("--rotation", "0deg");
       }}
       style={{
-        width,
+        width: "100%",
+        maxWidth: width,
         height,
         border: `${borderWidth}px solid transparent`,
         borderRadius: "1.5rem",

@@ -846,6 +846,21 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  .bento-hero {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 2rem !important;
+    padding: 20px 16px !important;
+  }
+  .hero-left-col, .hero-right-col {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
 /* =============================================
    ABOUT ME SECTION (Refactored)
    ============================================= */
