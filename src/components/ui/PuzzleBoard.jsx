@@ -6,45 +6,49 @@ import './PuzzleBoard.css';
 const PuzzleBoard = ({ 
   targetWordLength = 7, 
   clickedLetters = [],
-  onReset 
+  onReset,
+  instruction = "Clique diretamente nas letras do\nbusto ou use o seu teclado."
 }) => {
   const slots = Array.from({ length: targetWordLength });
 
   return (
-    <div className="puzzle-modal">
-      <h3 className="instruction-text">
-        Clique diretamente nas letras do busto ou use o seu teclado.
-      </h3>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+      <div className="easter-egg-spelling-container">
+        {instruction && (
+          <p className="easter-egg-instruction-inside">
+            {instruction.split('\n').map((line, idx) => (
+              <React.Fragment key={idx}>
+                {line}
+                {idx < instruction.split('\n').length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </p>
+        )}
+        <div className="easter-egg-spelling">
+          {slots.map((_, index) => {
+            const letter = clickedLetters[index];
+            const isFilled = !!letter;
+            const isSuccess = clickedLetters.length === targetWordLength;
 
-      <div className="word-grid">
-        {slots.map((_, index) => {
-          const letter = clickedLetters[index];
-          const isFilled = !!letter;
-
-          return (
-            <div 
-              key={index}
-              className={`letter-box ${isFilled ? 'filled' : 'empty'}`}
-            >
-              <AnimatePresence>
-                {isFilled && (
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                  >
-                    {letter}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+            return (
+              <motion.div
+                key={index}
+                className={`easter-egg-spelling-box ${
+                  isSuccess ? 'success' : isFilled ? 'filled' : ''
+                }`}
+                animate={isFilled ? { scale: [0.8, 1.2, 1], borderColor: "#FFD700", color: "#FFD700", textShadow: "0 0 10px rgba(255,215,0,0.5)" } : { scale: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isFilled ? letter : <span className="spelling-box-dash">—</span>}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-
-      <div className="action-area">
+      
+      <div className="action-area mt-4">
         {clickedLetters.length > 0 && (
-          <button onClick={onReset} className="reset-button">
+          <button onClick={onReset} className="btn-reset">
             <Trash2 size={16} />
             Reset
           </button>

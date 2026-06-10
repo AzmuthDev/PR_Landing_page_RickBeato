@@ -39,6 +39,25 @@ const highlightText = (text) => {
   });
 };
 
+const highlightHeroText = (text) => {
+  if (typeof text !== 'string') return text;
+  const regex = /(Geddy Lee|Rick Beato|Anika Nilles|Alex Lifeson|Rush)/gi;
+  const parts = text.split(regex);
+  return parts.map((part, i) => {
+    const lower = part.toLowerCase();
+    if (lower === 'rush') {
+      return <span key={i} className="hero-highlight-rush">RUSH</span>;
+    }
+    if (lower === 'geddy lee' || lower === 'anika nilles' || lower === 'alex lifeson') {
+      return <span key={i} className="hero-highlight-yellow">{part}</span>;
+    }
+    if (lower === 'rick beato') {
+      return <span key={i} className="hero-highlight-blue">{part}</span>;
+    }
+    return part;
+  });
+};
+
 const CustomCrown = ({ size = 24, color = "currentColor", strokeWidth = 2, className = "" }) => (
   <svg
     width={size}
@@ -305,30 +324,19 @@ const App = () => {
       <section className="dashboard-section" id="grid">
         <div className="bento-hero" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', textAlign: 'left', zIndex: 10, flexWrap: 'wrap', gap: '2rem' }}>
           <div className="hero-left-col" style={{ flex: '1 1 500px' }}>
-            <div className="hero-title-wrapper">
-              <h1 className="hero-main-title">
-                <span className="title-gradient-lined">PORTAL RUSH ZINE:</span>
-              </h1>
-              <div className="hero-top-subtitle">PRIMEIRA EDIÇÃO</div>
-            </div>
-            
-            <div className="hero-call-text">
-              <div className="hero-call-row">
-                <span className="hero-call-white">Sua curadoria de</span>
-              </div>
-              <div className="hero-call-row">
-                <span className="hero-call-white">conteúdos do</span>
-                <span className="hero-call-rush">RUSH</span>
-              </div>
-            </div>
-            
-            <div className="hero-guide-text-box">
-              <span className="guide-title">Nesta edição:</span>
-              <span className="highlight-lines">7 tópicos essenciais</span> na entrevista de <br/>
-              <span className="highlight-yellow">Geddy Lee</span> com o produtor <span className="highlight-blue">Rick Beato</span>; novo capítulo <br/>
-              colaborativo sobre <span className="highlight-yellow">Anika Nilles</span>; Game com Easter <br/>
-              Eggs & Puzzle, lojinha do Portal (disponível no Brasil).
-            </div>
+        <div className="hero-zine-content-stack">
+          {/* Zine Header */}
+          <h1 className="hero-zine-header">
+            <span className="hero-zine-title">PORTAL RUSH ZINE:</span>
+            <span className="hero-zine-edition">{t.heroTitle}</span>
+          </h1>
+          <p className="hero-zine-subtitle">{highlightHeroText(t.heroSubtitle)}</p>
+          <p className="hero-zine-guide">
+            <span className="hero-guide-p1">{t.heroGuidePart1}</span>
+            <span className="hero-guide-p2">{t.heroGuidePart2}</span>
+            <span className="hero-guide-p3">{highlightHeroText(t.heroGuidePart3)}</span>
+          </p>
+        </div>
           </div>
 
           <div className="hero-right-col" style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'flex-end', zIndex: 15 }}>

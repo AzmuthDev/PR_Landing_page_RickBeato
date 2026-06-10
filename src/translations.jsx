@@ -5,13 +5,11 @@ export const translations = {
     navAEntrevista: "A Entrevista",
     navONovoCapitulo: "O Novo Capítulo",
     navLivro: "My Effin' Life",
-    heroTitle: <><span className="highlight-member">Geddy Lee</span> entrevistado no <span className="highlight-tanios">Rick Beato</span></>,
-    heroSubtitle: (
-      <div className="hero-subtitle-container">
-        <span className="hero-subtitle-main">SEPARAMOS <strong className="hero-subtitle-number">7</strong> TÓPICOS COMENTADOS</span>
-        <span className="hero-subtitle-sub">que você deveria assistir nessa entrevista.</span>
-      </div>
-    ),
+    heroTitle: "Primeira Edição",
+    heroSubtitle: "Sua curadoria de conteúdos do RUSH",
+    heroGuidePart1: "Nesta edição: ",
+    heroGuidePart2: "7 tópicos essenciais ",
+    heroGuidePart3: "na entrevista de Geddy Lee com o produtor Rick Beato; novo capítulo colaborativo sobre Anika Nilles; Game com Easter Eggs & Puzzle, lojinha do Portal (disponível no Brasil).",
     collapseHint: "Recolher",
     
     // Cards
@@ -94,6 +92,7 @@ export const translations = {
     aboutMeAuthor: 'Tânios Rush Acácio - Criador do Portal Rush Brasil.',
     easterEggTitle: "BUSTO DO GEDDY LEE",
     easterEggSubtitle: "Encontre e clique nas 7 letras espalhadas pela escultura na ordem correta para desbloquear a recompensa secreta.",
+    easterEggInstruction: "Clique diretamente nas letras do\nbusto ou use o seu teclado.",
     easterEggDebugToggle: "Modo de Depuração (Bordas)",
     easterEggSuccess: "Sucesso! O segredo de GERSHON foi revelado. Veja o novo vídeo no topo da página!",
     easterEggHint: "Pista: Diga meu nome.",
@@ -106,13 +105,11 @@ export const translations = {
     navAEntrevista: "The Interview",
     navONovoCapitulo: "The New Chapter",
     navLivro: "My Effin' Life",
-    heroTitle: <><span className="highlight-member">Geddy Lee</span> interviewed on <span className="highlight-tanios">Rick Beato</span></>,
-    heroSubtitle: (
-      <div className="hero-subtitle-container">
-        <span className="hero-subtitle-main">We picked <strong className="hero-subtitle-number">7</strong> COMMENTED topics</span>
-        <span className="hero-subtitle-sub">you should watch in this interview.</span>
-      </div>
-    ),
+    heroTitle: "First Edition",
+    heroSubtitle: "Your curation of RUSH content",
+    heroGuidePart1: "In this edition: ",
+    heroGuidePart2: "7 essential topics ",
+    heroGuidePart3: "in Geddy Lee's interview with producer Rick Beato; new collaborative chapter on Anika Nilles; Game with Easter Eggs & Puzzle, Portal store (available in Brazil).",
     collapseHint: "Collapse",
     
     // Cards
@@ -195,6 +192,7 @@ export const translations = {
     aboutMeAuthor: 'Tânios Rush Acácio - Creator of Portal Rush Brasil.',
     easterEggTitle: "GEDDY LEE'S BUST",
     easterEggSubtitle: "Find and click on the 7 letters scattered across the sculpture in the correct order to unlock the secret reward.",
+    easterEggInstruction: "Click directly on the letters of the\nbust or use your keyboard.",
     easterEggDebugToggle: "Debug Mode (Borders)",
     easterEggSuccess: "Success! The secret of GERSHON has been revealed. Check the new video at the top of the page!",
     easterEggHint: "Hint: Say My Name.",
@@ -207,13 +205,11 @@ export const translations = {
     navAEntrevista: "La Entrevista",
     navONovoCapitulo: "El Nuevo Capítulo",
     navLivro: "My Effin' Life",
-    heroTitle: <><span className="highlight-member">Geddy Lee</span> entrevistado en <span className="highlight-tanios">Rick Beato</span></>,
-    heroSubtitle: (
-      <div className="hero-subtitle-container">
-        <span className="hero-subtitle-main">Elegimos <strong className="hero-subtitle-number">7</strong> Temas COMENTADOS</span>
-        <span className="hero-subtitle-sub">que deberías ver en esta entrevista.</span>
-      </div>
-    ),
+    heroTitle: "Primera Edición",
+    heroSubtitle: "Su curaduría de contenidos de RUSH",
+    heroGuidePart1: "En esta edición: ",
+    heroGuidePart2: "7 temas esenciales ",
+    heroGuidePart3: "en la entrevista de Geddy Lee con el productor Rick Beato; nuevo capítulo colaborativo sobre Anika Nilles; Game con Easter Eggs & Puzzle, tienda del Portal (disponible en Brasil).",
     collapseHint: "Ocultar",
     
     // Cards
@@ -296,6 +292,7 @@ export const translations = {
     aboutMeAuthor: 'Tânios Rush Acácio - Creador de Portal Rush Brasil.',
     easterEggTitle: "BUSTO DE GEDDY LEE",
     easterEggSubtitle: "Encuentra y haz clic en las 7 letras esparcidas por la escultura en el orden correcto para desbloquear la recompensa secreta.",
+    easterEggInstruction: "Haz clic directamente en las letras del\nbusto o usa tu teclado.",
     easterEggDebugToggle: "Modo de Depuración (Bordes)",
     easterEggSuccess: "¡Éxito! El secreto de GERSHON ha sido revelado. ¡Mira el nuevo video en la parte superior de la página!",
     easterEggHint: "Pista: Di mi nombre.",

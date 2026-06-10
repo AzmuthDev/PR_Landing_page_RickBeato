@@ -1,90 +1,181 @@
-.puzzle-modal {
+.easter-egg-spelling-container {
   position: relative;
-  background-color: rgba(13, 9, 20, 0.85); /* Levemente transparente */
+  background: rgba(22, 22, 22, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 1.5rem;
-  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 28px;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  justify-content: center;
   align-items: center;
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 400px;
-  z-index: 10;
-  margin: 0 auto;
+  overflow: hidden; /* Mask the rotating border */
+  z-index: 1;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.instruction-text {
-  color: #a8a8b3;
-  text-align: center;
-  font-size: 1.1rem;
-  font-family: 'Montserrat', sans-serif; /* Fonte parecida com a imagem */
-  font-weight: 700;
+/* Conic gradient rotating border light */
+.easter-egg-spelling-container::before {
+  content: '';
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(124, 58, 237, 0.8) 25%,   /* Bright Purple */
+    rgba(236, 72, 153, 0.8) 50%,   /* Neon Pink */
+    transparent 75%,
+    rgba(124, 58, 237, 0.8) 100%
+  );
+  animation: rotateBorderGlow 4s linear infinite;
+  z-index: -2;
+}
+
+/* Dark inner card mask */
+.easter-egg-spelling-container::after {
+  content: '';
+  position: absolute;
+  inset: 2px; /* 2px border thickness */
+  background: rgba(18, 18, 18, 0.96); /* Solid dark center mask */
+  border-radius: 14px;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.easter-egg-spelling-container:hover::after {
+  background: rgba(22, 22, 22, 0.94);
+}
+
+.easter-egg-instruction-inside {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: #a3a3a3; /* text-secondary */
+  font-weight: 600;
   margin: 0;
-  line-height: 1.6;
-  letter-spacing: 0.02em;
+  text-align: center;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
 }
 
-.word-grid {
+@keyframes rotateBorderGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.easter-egg-spelling {
+  position: relative;
+  z-index: 2;
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
   justify-content: center;
-  width: 100%;
 }
 
-.letter-box {
-  width: 2.5rem;
-  height: 3.5rem;
+.easter-egg-spelling-box {
+  width: 40px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
-  font-family: 'Montserrat', sans-serif; /* Fonte parecida com a imagem */
+  background: rgba(255, 255, 255, 0.02);
+  border: none;
+  border-bottom: 2px solid rgba(124, 58, 237, 0.3); /* Purplish bottom line */
+  border-radius: 4px 4px 0 0;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.8rem;
-  font-weight: 900; /* Extra bold */
-  transition: all 0.3s ease;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
 }
 
-/* Caixas Atuais (Preenchidas): fundo amarelo dourado e texto amarelo */
-.letter-box.filled {
-  background-color: transparent;
-  border: 2px solid #ffc107;
-  color: #ffc107;
-  text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
-  box-shadow: inset 0 0 15px rgba(255, 193, 7, 0.1), 0 0 15px rgba(255, 193, 7, 0.2);
+.spelling-box-dash {
+  opacity: 0.5;
+  color: rgba(124, 58, 237, 0.7); /* Purplish dash placeholder */
+  font-weight: 300;
+  font-size: 1.4rem;
 }
 
-/* Caixas Vazias (Slot): borda inferior cinza escura fina */
-.letter-box.empty {
-  background-color: #1a1824;
-  border: 1px solid transparent;
-  border-bottom: 2px solid #3f3f46;
+.easter-egg-spelling-box.filled {
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgb(124, 58, 237);
+  color: rgb(124, 58, 237);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.25);
+  text-shadow: 0 0 6px rgba(124, 58, 237, 0.7);
+}
+
+.easter-egg-spelling-box.success {
+  background: rgba(74, 222, 128, 0.15);
+  border: 1px solid rgb(74, 222, 128);
+  color: rgb(74, 222, 128);
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.25);
+  text-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
+}
+
+.btn-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+}
+
+.btn-reset:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
 }
 
 .action-area {
   display: flex;
   justify-content: center;
-  min-height: 2.5rem;
+  width: 100%;
 }
 
-.reset-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: rgba(139, 35, 38, 0.15); /* Fundo cinza escuro/avermelhado */
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #d1d5db;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 600;
-  font-family: sans-serif;
+@media (max-width: 480px) {
+  .easter-egg-spelling {
+    gap: 4px;
+  }
+  
+  .easter-egg-spelling-box {
+    width: 32px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  .spelling-box-dash {
+    font-size: 1.1rem;
+  }
+  
+  .easter-egg-spelling-container {
+    padding: 16px 10px;
+  }
 }
 
-.reset-button:hover {
-  background-color: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-  border-color: rgba(239, 68, 68, 0.5);
+@media (max-width: 350px) {
+  .easter-egg-spelling {
+    gap: 2px;
+  }
+  
+  .easter-egg-spelling-box {
+    width: 26px;
+    height: 34px;
+    font-size: 1.2rem;
+  }
 }

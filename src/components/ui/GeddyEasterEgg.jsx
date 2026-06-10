@@ -179,7 +179,8 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
           <PuzzleBoard 
             targetWordLength={7} 
             clickedLetters={userCode} 
-            onReset={clearSequence} 
+            onReset={clearSequence}
+            instruction={t.easterEggInstruction} 
           />
 
           <div className="easter-egg-controls mt-6 flex justify-center w-full">

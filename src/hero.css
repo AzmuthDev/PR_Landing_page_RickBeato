@@ -1,4 +1,29 @@
 @font-face {
+  font-family: 'Rush Fly By Night';
+  src: url('/rushfonts/FlyByNightregular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Beyond The Lighted Stage';
+  src: url('/rushfonts/BeyondTheLightedStage.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Rush Syrinx';
+  src: url('/rushfonts/Syrinx.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Grand Designs Lined';
+  src: url('/rushfonts/GrandDesignsLined.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Rush R30';
+  src: url('/rushfonts/R30.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Neue Machina';
   src: url('/rushfonts/NeueMachina-Ultrabold.otf') format('opentype');
   font-weight: 800;
@@ -304,5 +329,126 @@
     padding-top: 20px;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+/* =============================================
+   PORTAL RUSH ZINE - HERO UPGRADE STYLES
+   ============================================= */
+
+.hero-highlight-rush {
+  color: #ff0000;
+  -webkit-text-fill-color: #ff0000;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.hero-highlight-yellow {
+  color: #FFD700;
+  -webkit-text-fill-color: #FFD700;
+  font-weight: 700;
+}
+
+.hero-highlight-blue {
+  color: #0088FF;
+  -webkit-text-fill-color: #0088FF;
+  font-weight: 700;
+}
+
+.hero-zine-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.hero-zine-title {
+  font-family: 'Neue Machina', sans-serif;
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #a5f3fc 0%, #00d2ff 30%, #0066ff 70%, #003399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-zine-edition {
+  font-family: 'Rush Fly By Night', sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: #e8ddb7;
+  line-height: 1.1;
+  text-transform: none;
+  letter-spacing: 0.05em;
+  font-weight: normal;
+}
+
+.hero-zine-content-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px;
+  max-width: 1000px;
+}
+
+.hero-zine-subtitle {
+  font-family: 'Beyond The Lighted Stage', sans-serif;
+  font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+  line-height: 1.2;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  white-space: pre-line;
+}
+
+.hero-zine-guide {
+  font-size: clamp(1.2rem, 2.4vw, 2.4rem);
+  line-height: 1.4;
+  color: #e8ddb7;
+  border-left: 5px solid #ff0000;
+  padding-left: 24px;
+  margin: 0;
+  max-width: 900px;
+}
+
+.hero-guide-p1 {
+  font-family: 'Rush Syrinx', sans-serif;
+}
+
+.hero-guide-p2 {
+  font-family: 'Grand Designs Lined', sans-serif;
+  color: #00f3ff;
+  text-shadow: 0 0 4px rgba(0, 243, 255, 0.6);
+  animation: crt-text-glitch 2s infinite steps(2), crt-text-flicker 0.25s infinite;
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.hero-guide-p3 {
+  font-family: 'Rush R30', sans-serif;
+}
+
+@media (max-width: 991px) {
+  .hero-zine-header {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .hero-zine-content-stack {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-zine-guide {
+    border-left: none;
+    border-top: 3px solid #ff0000;
+    padding-left: 0;
+    padding-top: 16px;
+    text-align: center;
   }
 }
