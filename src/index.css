@@ -2149,14 +2149,18 @@ img { max-width: 100%; display: block; }
 }
 
 .easter-egg-header p {
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: #fff;
-  font-weight: 500;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0px 0px 8px rgba(0, 0, 0, 0.6);
-  max-width: 600px;
-  margin: 0 auto 24px auto;
-  line-height: 1.6;
+}
+
+.easter-egg-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  color: var(--color-beige-light);
+  font-weight: 600;
+  max-width: 900px;
+  margin: 0 auto 16px auto;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
 }
 
 .easter-egg-container {

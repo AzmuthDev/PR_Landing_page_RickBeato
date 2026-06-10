@@ -94,7 +94,7 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
       {showConfetti && <Confetti recycle={false} numberOfPieces={600} gravity={0.15} />}
       <div className="easter-egg-header">
         <h2>{t.easterEggTitle}</h2>
-        <p>{t.easterEggSubtitle}</p>
+        <p className="easter-egg-subtitle">{t.easterEggSubtitle}</p>
       </div>
 
       <AnimatePresence mode="wait">
@@ -262,13 +262,19 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
             <div className="reward-video-wrapper">
               <iframe src="https://www.youtube.com/embed/8WYWcGOGwog?autoplay=1" title="Geddy Lee Fan Question" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
-            <div className="reward-banner-belas-letras">
+            <a 
+              href="https://www.belasletras.com.br/loja/busca.php?loja=1194178&palavra_busca=My+Effin+Life" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="reward-banner-belas-letras"
+              style={{ textDecoration: 'none' }}
+            >
               <div className="banner-text">
                 <h4>{t.easterEggRewardTitle}</h4>
                 <p>{t.easterEggRewardDesc}</p>
               </div>
               <div className="banner-coupon"><span>{t.easterEggCouponLabel}</span><strong>PORTALRUSH10</strong></div>
-            </div>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

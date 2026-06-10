@@ -289,12 +289,13 @@
   background-color: #ffffff;
   border-radius: 12px;
   padding: 10px;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
 }
 
 .bmac-link-square:hover, .pix-btn-square:hover {
@@ -307,6 +308,10 @@
   height: 100%;
   object-fit: contain;
   border-radius: 8px;
+}
+
+.pix-btn-square img {
+  transform: scale(1.35);
 }
 
 @media (max-width: 768px) {
