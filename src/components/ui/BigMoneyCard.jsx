@@ -25,14 +25,14 @@ export const BigMoneyCard = () => {
             rel="noopener noreferrer" 
             className="bmac-link-square"
           >
-            <img src="/imgi_17_buy-me-a-coffee.png" alt="Buy Me A Coffee" />
+            <img src={`${import.meta.env.BASE_URL}imgi_17_buy-me-a-coffee.png`} alt="Buy Me A Coffee" />
           </a>
         </div>
 
         <div className="support-action-col">
           <span className="action-label">CHAVE PIX</span>
           <button className="pix-btn-square">
-            <img src="/pix-qrcode.jpeg" alt="PIX QR Code" />
+            <img src={`${import.meta.env.BASE_URL}pix-qrcode.jpeg`} alt="PIX QR Code" />
           </button>
         </div>
 

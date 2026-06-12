@@ -111,7 +111,7 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
           onClick={handleOutsideClick}
         >
           <img 
-            src="/geddy-bust-removebg.png" 
+            src={`${import.meta.env.BASE_URL}geddy-bust-removebg.png`} 
             alt="Geddy Lee sliced sculpture" 
           />
 
@@ -238,7 +238,7 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
             }}
           >
             <video
-              src="/Animacao_Geddy_Lee_Site.mp4"
+              src={`${import.meta.env.BASE_URL}Animacao_Geddy_Lee_Site.mp4`}
               autoPlay
               playsInline
               onEnded={() => setShowAnimationVideo(false)}

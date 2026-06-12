@@ -81,7 +81,7 @@ const getTopics = (t) => [
     badge: '01',
     title: t.t1Title,
     category: 'criacao',
-    icon: <img src="/imgi_3_rush-bass-icon.png" alt="Rush Logo" className="custom-rush-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}imgi_3_rush-bass-icon.png`} alt="Rush Logo" className="custom-rush-icon" />,
     videoStart: 18,
     summary: t.t1Summary,
     detail: t.t1Detail,
@@ -91,7 +91,7 @@ const getTopics = (t) => [
     badge: '02',
     title: t.t2Title,
     category: 'equipamento',
-    icon: <img src="/2 herois do baixo Rush - Yes Cream The Who.jpg" alt="Heróis do Baixo" className="t2-custom-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}2 herois do baixo Rush - Yes Cream The Who.jpg`} alt="Heróis do Baixo" className="t2-custom-icon" />,
     videoStart: 167,
     summary: t.t2Summary,
     detail: t.t2Detail,
@@ -101,7 +101,7 @@ const getTopics = (t) => [
     badge: '03',
     title: t.t3Title,
     category: 'equipamento',
-    icon: <img src="/2button-baixo-azul-esquisito-drop-bass.png" alt="Baixo Azul Esquisito" className="t2-custom-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}2button-baixo-azul-esquisito-drop-bass.png`} alt="Baixo Azul Esquisito" className="t2-custom-icon" />,
     videoStart: 438,
     summary: t.t3Summary,
     detail: t.t3Detail,
@@ -111,7 +111,7 @@ const getTopics = (t) => [
     badge: '04',
     title: t.t4Title,
     category: 'turne',
-    icon: <img src="/4-button-r50-rush-fifthysomething.png" alt="Turnê Fifty Something" className="t2-custom-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}4-button-r50-rush-fifthysomething.png`} alt="Turnê Fifty Something" className="t2-custom-icon" />,
     videoStart: 524,
     summary: t.t4Summary,
     detail: t.t4Detail,
@@ -121,7 +121,7 @@ const getTopics = (t) => [
     badge: '05',
     title: t.t5Title,
     category: 'criacao',
-    icon: <img src="/criacao-musicas.png" alt="Criação das Músicas" className="t2-custom-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}criacao-musicas.png`} alt="Criação das Músicas" className="t2-custom-icon" />,
     videoStart: 670,
     summary: t.t5Summary,
     detail: t.t5Detail,
@@ -131,7 +131,7 @@ const getTopics = (t) => [
     badge: '06',
     title: t.t7Title,
     category: 'bastidores',
-    icon: <img src="/6-button- Alex Lifeson.png" alt="Alex Lifeson Aparece de Supetão" className="t2-custom-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}6-button- Alex Lifeson.png`} alt="Alex Lifeson Aparece de Supetão" className="t2-custom-icon" />,
     videoStart: 2707,
     summary: t.t7Summary,
     detail: t.t7Detail,
@@ -141,7 +141,7 @@ const getTopics = (t) => [
     badge: '07',
     title: t.t6Title,
     category: 'turne',
-    icon: <img src="/7-button-anikanilles-.png" alt="Anika Nilles Logo" className="t2-custom-icon" />,
+    icon: <img src={`${import.meta.env.BASE_URL}7-button-anikanilles-.png`} alt="Anika Nilles Logo" className="t2-custom-icon" />,
     videoStart: 3527,
     summary: t.t6Summary,
     detail: t.t6Detail,
@@ -266,7 +266,7 @@ const App = () => {
           
           <div className="nav-center">
             <a href="https://portalrushbrasil.com.br/" target="_blank" rel="noopener noreferrer" className="nav-logo">
-              <img src="/logo_portalrush.png" alt="Portal Rush Brasil" className="nav-logo-img" />
+              <img src={`${import.meta.env.BASE_URL}logo_portalrush.png`} alt="Portal Rush Brasil" className="nav-logo-img" />
             </a>
           </div>
 
@@ -316,7 +316,7 @@ const App = () => {
 
       {/* ===== BACKGROUND IMAGE ===== */}
       <div className="bento-bg">
-        <img src="/Fundo_hero.png" alt="Cenário de Fundo" />
+        <img src={`${import.meta.env.BASE_URL}Fundo_hero.png`} alt="Cenário de Fundo" />
         <div className="bento-bg-overlay"></div>
       </div>
 
@@ -427,7 +427,7 @@ const App = () => {
         <div className="anika-video-mask">
           {isAnikaInView && (
             <video autoPlay loop muted playsInline className="anika-bg-video">
-              <source src="/anika-bg-video.mp4" type="video/mp4" />
+              <source src={`${import.meta.env.BASE_URL}anika-bg-video.mp4`} type="video/mp4" />
             </video>
           )}
           <div className="anika-video-overlay"></div>
@@ -445,7 +445,7 @@ const App = () => {
           <div className="anika-banner-image-container">
             <a href="https://portalrushbrasil.com.br/anika-nilles/sobre-anika-nilles-baterista-do-rush/?utm_source=rick_beato_lp&utm_medium=website&utm_campaign=anika_nilles" target="_blank" rel="noopener noreferrer" style={{display: 'block', height: '100%'}}>
               <HolographicImage
-                src="/incompleto-Sobre-Anika-Nilles-about-story.jpg"
+                src={`${import.meta.env.BASE_URL}incompleto-Sobre-Anika-Nilles-about-story.jpg`}
                 alt="Anika Nilles"
               />
             </a>
@@ -463,25 +463,25 @@ const App = () => {
             <div className="anika-dw-grid" style={{ position: 'relative', zIndex: 2 }}>
               <div className="anika-dw-card">
                 <Floating3DWrapper className="anika-card-img-wrapper">
-                  <img src="/anika_prato.png" alt="Técnica Rítmica - Anika Nilles" style={{ objectPosition: 'top' }} />
+                  <img src={`${import.meta.env.BASE_URL}anika_prato.png`} alt="Técnica Rítmica - Anika Nilles" style={{ objectPosition: 'top' }} />
                 </Floating3DWrapper>
                 <span className="anika-card-label">{t.anikaLabel1}</span>
               </div>
               <div className="anika-dw-card">
                 <Floating3DWrapper className="anika-card-img-wrapper">
-                  <img src="/anika_ensaio_intenso.png" alt="Ensaios Intensos - Anika Nilles" />
+                  <img src={`${import.meta.env.BASE_URL}anika_ensaio_intenso.png`} alt="Ensaios Intensos - Anika Nilles" />
                 </Floating3DWrapper>
                 <span className="anika-card-label">{t.anikaLabel2}</span>
               </div>
               <div className="anika-dw-card">
                 <Floating3DWrapper className="anika-card-img-wrapper">
-                  <img src="/trio_pb.png" alt="Novo Setlist - Geddy, Alex e Anika" />
+                  <img src={`${import.meta.env.BASE_URL}trio_pb.png`} alt="Novo Setlist - Geddy, Alex e Anika" />
                 </Floating3DWrapper>
                 <span className="anika-card-label">{t.anikaLabel3}</span>
               </div>
               <div className="anika-dw-card">
                 <Floating3DWrapper className="anika-card-img-wrapper">
-                  <img src="/anika_energia.png" alt="Energia Contagiante - Anika Nilles" />
+                  <img src={`${import.meta.env.BASE_URL}anika_energia.png`} alt="Energia Contagiante - Anika Nilles" />
                 </Floating3DWrapper>
                 <span className="anika-card-label">{t.anikaLabel4}</span>
               </div>
@@ -526,7 +526,7 @@ const App = () => {
               </div>
             </div>
             <div className="book-banner-image">
-              <img src="/livrosemfundo.png" alt="Livro My Effin' Life" className="book-image-transparent" />
+              <img src={`${import.meta.env.BASE_URL}livrosemfundo.png`} alt="Livro My Effin' Life" className="book-image-transparent" />
             </div>
           </a>
         </div>
@@ -539,7 +539,7 @@ const App = () => {
         {isFooterInView && (
           <video 
             className="footer-video-bg" 
-            src="/Banner_Animado_Desktop.mp4" 
+            src={`${import.meta.env.BASE_URL}Banner_Animado_Desktop.mp4`} 
             autoPlay 
             loop 
             muted 
@@ -577,7 +577,7 @@ const App = () => {
                 onMouseEnter={(e) => { e.currentTarget.querySelector('img').style.transform = 'scale(1.05)'; }}
                 onMouseLeave={(e) => { e.currentTarget.querySelector('img').style.transform = 'scale(1)'; }}
               >
-                <img src={`/banner-${num}.webp`} alt={`Coleção ${num}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }} />
+                <img src={`${import.meta.env.BASE_URL}banner-${num}.webp`} alt={`Coleção ${num}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }} />
               </a>
             ))}
           </div>
@@ -612,7 +612,7 @@ const App = () => {
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
       >
-        <img src="/whatsapp-icon.png" alt="WhatsApp" loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}whatsapp-icon.png`} alt="WhatsApp" loading="lazy" />
       </a>
 
     </>
