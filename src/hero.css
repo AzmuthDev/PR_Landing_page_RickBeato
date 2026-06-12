@@ -190,12 +190,12 @@
   border: 2px solid #2ecc71;
   box-shadow: 0 8px 30px rgba(46, 204, 113, 0.25), inset 0 0 15px rgba(46, 204, 113, 0.15);
   border-radius: 16px;
-  padding: 24px;
+  padding: 22px;
   width: 100%;
-  max-width: 480px;
+  max-width: 432px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   color: #eafaf1;
   position: relative;
   overflow: hidden;
@@ -220,7 +220,7 @@
 /* Título THE BIG MONEY */
 .big-money-title {
   font-family: 'Neue Machina', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #2ecc71;
   text-shadow: 0 0 6px rgba(46, 204, 113, 0.4);
@@ -261,7 +261,7 @@
 /* Layout em Colunas para os Botões Quadrados */
 .big-money-actions-row {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   justify-content: center;
 }
 
@@ -275,7 +275,7 @@
 
 .action-label {
   font-family: 'Neue Machina', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 800;
   color: #a2e8c5;
   letter-spacing: 0.05em;
@@ -289,8 +289,8 @@
   background-color: #ffffff;
   border-radius: 12px;
   padding: 10px;
-  width: 150px;
-  height: 150px;
+  width: 135px;
+  height: 135px;
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
