@@ -551,12 +551,12 @@ const App = () => {
         <div className="footer-content-wrapper" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "60px", position: "relative", zIndex: 2 }}>
           <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center", width: "100%", maxWidth: "900px" }}>
             <BuyMeCoffeeCard 
-              image="/imgi_17_buy-me-a-coffee.png" 
+              image={`${import.meta.env.BASE_URL}imgi_17_buy-me-a-coffee.png`} 
               coffeeLink="https://buymeacoffee.com/portalrushzine" 
             />
             <PixCard 
-              bannerImage="/pix-qrcode.jpeg" 
-              qrImage="/pix-qrcode.jpeg" 
+              bannerImage={`${import.meta.env.BASE_URL}pix-qrcode.jpeg`} 
+              qrImage={`${import.meta.env.BASE_URL}pix-qrcode.jpeg`} 
             />
           </div>
 

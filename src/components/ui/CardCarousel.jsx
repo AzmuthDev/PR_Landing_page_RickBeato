@@ -4,26 +4,26 @@ import { ExternalLink } from 'lucide-react';
 
 /* ===== CURATED CARDS with metadata (used in Track 1) ===== */
 const CURATED_CARDS = [
-  { id: 't1-1', src: '/rush-reposted-portal-rush1.jpg', topTitle: 'Rush South Park', description: 'Repostado pelo @RUSH - South Park.', link: 'https://www.instagram.com/stories/highlights/18281584825282043/' },
-  { id: 't1-2', src: '/Jillian-Maryonovich-rushcon.jpg', topTitle: 'RushCon', description: 'Jillian Maryonovich - Diretora Criativa da RushCon. "You work is fantastic! Really fun stuff".', link: 'https://x.com/RushFanCast/status/1854733719627608282' },
-  { id: 't1-3', src: '/portal-rush-mtv-hulk.jpg', topTitle: 'MTV Hulk', description: 'Carol Zaine - Portal Rush Brasil - MTV - HULK.JPG', link: 'https://www.flickr.com/photos/carolzaine/albums/72157625125588376/' },
-  { id: 't1-4', src: '/cerveja-do-rush.jpg', topTitle: 'Cerveja do Rush', description: 'Matéria sobre a cerveja do Rush.', link: 'https://portalrushbrasil.com.br/cerveja-do-rush-reuniao/' },
-  { id: 't1-5', src: '/tf4-portal-rush.png', topTitle: 'T4F Tickets for Fun', description: '"Sou Regis, da Tel. Estamos a procura de uns fã do fush para uma materia de TV..." - Regis Motisuki.', link: 'https://imgur.com/a/1RMtEPL' },
-  { id: 't1-6', src: '/rush-staff-craig-blazier.png', topTitle: 'Craig Blazier', description: '"Great shirts!! The crew and band will get a kick out of them when I wear them. Thanks!!" - Gerente de Produção do Rush.', link: 'https://imgur.com/a/Zp0oVfJ' },
-  { id: 't1-7', src: '/something-for-nothing-139.png', topTitle: 'Maior Podcast do Rush', description: '"That might be the best email you ever read" - Steve. Podcast sobre o Rush no Mundo - Episódio 139.', link: 'https://open.spotify.com/episode/03wWuhH49Z4YNSOryKAX6f' },
-  { id: 't1-8', src: '/primeiro-show-cover-rio.jpg', topTitle: 'Carbonmade Portfolio', description: 'Carbonmade Portal Rush Brasil Tanios Acacio Portfolio.jpg', link: 'https://imgur.com/a/rgfIrin' },
-  { id: 't1-9', src: '/rush-festival-galpao.jpg', topTitle: 'Rush Festival 2016', description: 'Rush Festival Brasil 2016', link: 'https://imgur.com/a/gmbKqKu' },
-  { id: 't1-10', src: '/rush-cover-rio-2010.jpg', topTitle: 'Rush Festival 2015', description: 'Rush Festival Brasil - 2015', link: 'https://portalrushbrasil.com.br/rush-festival-brasil-2015/' },
-  { id: 't1-11', src: '/rushfest-2022.png', topTitle: 'Rush Fest 2022', description: 'Rush Fest 2022', link: 'https://portalrushbrasil.com.br/rush-fest-2022/' },
-  { id: 't1-12', src: '/rush-room-tanios.jpg', topTitle: 'Rushfans', description: '"Hi Tanios! This sounds like a neat project, and good designs too. Keep me posted!" - Ryan from Rushfans.', link: '#' },
-  { id: 't1-13', src: '/2112-ticket.jpg', topTitle: 'Rush History', description: 'Mais um marco na história da comunidade do Rush.', link: '#' },
-  { id: 't1-14', src: '/rush-staff-bruce-frenchie.png', topTitle: 'Rush Staff', description: 'Equipe e membros importantes da comunidade do Rush.', link: '#' },
-  { id: 't1-15', src: '/rush-in-rio2.jpg', topTitle: 'Rush in Rio', description: 'Rush in Rio - O momento inesquecível da turnê sul-americana.', link: '#' },
-  { id: 't1-16', src: '/rushinrio2-sp-mtv.jpg', topTitle: 'Rush in Rio SP MTV', description: 'Matéria e lembranças sobre o show de São Paulo.', link: '#' },
-  { id: 't1-17', src: '/something-for-nothing-podcast.png', topTitle: 'Something For Nothing', description: 'Podcast Something for Nothing - Uma análise da discografia e influência do Rush.', link: '#' },
-  { id: 't1-18', src: '/stories-geddy-lee.jpg', topTitle: 'Stories Geddy Lee', description: 'Interações e compartilhamentos via Stories.', link: '#' },
-  { id: 't1-19', src: '/tanios-amigos-rio.jpg', topTitle: 'Comunidade', description: 'Momentos com os amigos e fãs de Rush no Rio de Janeiro.', link: '#' },
-  { id: 't1-20', src: '/tanios-whiplash.jpg', topTitle: 'Whiplash', description: 'Entrevistas e contribuições para o portal Whiplash.', link: '#' },
+  { id: 't1-1', src: `${import.meta.env.BASE_URL}rush-reposted-portal-rush1.jpg`, topTitle: 'Rush South Park', description: 'Repostado pelo @RUSH - South Park.', link: 'https://www.instagram.com/stories/highlights/18281584825282043/' },
+  { id: 't1-2', src: `${import.meta.env.BASE_URL}Jillian-Maryonovich-rushcon.jpg`, topTitle: 'RushCon', description: 'Jillian Maryonovich - Diretora Criativa da RushCon. "You work is fantastic! Really fun stuff".', link: 'https://x.com/RushFanCast/status/1854733719627608282' },
+  { id: 't1-3', src: `${import.meta.env.BASE_URL}portal-rush-mtv-hulk.jpg`, topTitle: 'MTV Hulk', description: 'Carol Zaine - Portal Rush Brasil - MTV - HULK.JPG', link: 'https://www.flickr.com/photos/carolzaine/albums/72157625125588376/' },
+  { id: 't1-4', src: `${import.meta.env.BASE_URL}cerveja-do-rush.jpg`, topTitle: 'Cerveja do Rush', description: 'Matéria sobre a cerveja do Rush.', link: 'https://portalrushbrasil.com.br/cerveja-do-rush-reuniao/' },
+  { id: 't1-5', src: `${import.meta.env.BASE_URL}tf4-portal-rush.png`, topTitle: 'T4F Tickets for Fun', description: '"Sou Regis, da Tel. Estamos a procura de uns fã do fush para uma materia de TV..." - Regis Motisuki.', link: 'https://imgur.com/a/1RMtEPL' },
+  { id: 't1-6', src: `${import.meta.env.BASE_URL}rush-staff-craig-blazier.png`, topTitle: 'Craig Blazier', description: '"Great shirts!! The crew and band will get a kick out of them when I wear them. Thanks!!" - Gerente de Produção do Rush.', link: 'https://imgur.com/a/Zp0oVfJ' },
+  { id: 't1-7', src: `${import.meta.env.BASE_URL}something-for-nothing-139.png`, topTitle: 'Maior Podcast do Rush', description: '"That might be the best email you ever read" - Steve. Podcast sobre o Rush no Mundo - Episódio 139.', link: 'https://open.spotify.com/episode/03wWuhH49Z4YNSOryKAX6f' },
+  { id: 't1-8', src: `${import.meta.env.BASE_URL}primeiro-show-cover-rio.jpg`, topTitle: 'Carbonmade Portfolio', description: 'Carbonmade Portal Rush Brasil Tanios Acacio Portfolio.jpg', link: 'https://imgur.com/a/rgfIrin' },
+  { id: 't1-9', src: `${import.meta.env.BASE_URL}rush-festival-galpao.jpg`, topTitle: 'Rush Festival 2016', description: 'Rush Festival Brasil 2016', link: 'https://imgur.com/a/gmbKqKu' },
+  { id: 't1-10', src: `${import.meta.env.BASE_URL}rush-cover-rio-2010.jpg`, topTitle: 'Rush Festival 2015', description: 'Rush Festival Brasil - 2015', link: 'https://portalrushbrasil.com.br/rush-festival-brasil-2015/' },
+  { id: 't1-11', src: `${import.meta.env.BASE_URL}rushfest-2022.png`, topTitle: 'Rush Fest 2022', description: 'Rush Fest 2022', link: 'https://portalrushbrasil.com.br/rush-fest-2022/' },
+  { id: 't1-12', src: `${import.meta.env.BASE_URL}rush-room-tanios.jpg`, topTitle: 'Rushfans', description: '"Hi Tanios! This sounds like a neat project, and good designs too. Keep me posted!" - Ryan from Rushfans.', link: '#' },
+  { id: 't1-13', src: `${import.meta.env.BASE_URL}2112-ticket.jpg`, topTitle: 'Rush History', description: 'Mais um marco na história da comunidade do Rush.', link: '#' },
+  { id: 't1-14', src: `${import.meta.env.BASE_URL}rush-staff-bruce-frenchie.png`, topTitle: 'Rush Staff', description: 'Equipe e membros importantes da comunidade do Rush.', link: '#' },
+  { id: 't1-15', src: `${import.meta.env.BASE_URL}rush-in-rio2.jpg`, topTitle: 'Rush in Rio', description: 'Rush in Rio - O momento inesquecível da turnê sul-americana.', link: '#' },
+  { id: 't1-16', src: `${import.meta.env.BASE_URL}rushinrio2-sp-mtv.jpg`, topTitle: 'Rush in Rio SP MTV', description: 'Matéria e lembranças sobre o show de São Paulo.', link: '#' },
+  { id: 't1-17', src: `${import.meta.env.BASE_URL}something-for-nothing-podcast.png`, topTitle: 'Something For Nothing', description: 'Podcast Something for Nothing - Uma análise da discografia e influência do Rush.', link: '#' },
+  { id: 't1-18', src: `${import.meta.env.BASE_URL}stories-geddy-lee.jpg`, topTitle: 'Stories Geddy Lee', description: 'Interações e compartilhamentos via Stories.', link: '#' },
+  { id: 't1-19', src: `${import.meta.env.BASE_URL}tanios-amigos-rio.jpg`, topTitle: 'Comunidade', description: 'Momentos com os amigos e fãs de Rush no Rio de Janeiro.', link: '#' },
+  { id: 't1-20', src: `${import.meta.env.BASE_URL}tanios-whiplash.jpg`, topTitle: 'Whiplash', description: 'Entrevistas e contribuições para o portal Whiplash.', link: '#' },
 ];
 
 /* ===== ALL POST IMAGES — Pool unificado de 241 imagens ===== */
@@ -77,7 +77,7 @@ const ALL_POSTS = [
   '18448728343116561','18451488358106382','18454923889097900','18462425467101663','18513597760076058',
   '18544620979048642','18546304465071106','18547765888027765','18574034140055206','18589524406007985',
   '18596014447047822',
-].map(n => `/posts/${n}.jpg`);
+].map(n => `${import.meta.env.BASE_URL}posts/${n}.jpg`);
 
 /* ===== Distribuição equilibrada: ~80 posts por trilho ===== */
 const BATCH_SIZE = Math.ceil(ALL_POSTS.length / 3);
