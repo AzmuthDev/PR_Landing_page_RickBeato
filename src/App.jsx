@@ -273,7 +273,12 @@ const App = () => {
           <div className="nav-right">
             <div className="language-dropdown-container">
               <button className="nav-icon-btn lang-btn" onClick={() => setIsLangOpen(!isLangOpen)}>
-                <Globe size={24} />
+                <img 
+                  src={`https://flagcdn.com/${language === 'pt' ? 'br' : language === 'en' ? 'us' : 'es'}.svg`} 
+                  width="22" 
+                  alt={language} 
+                  style={{ borderRadius: '2px', marginRight: '4px' }} 
+                />
                 <span className="lang-text">{language.toUpperCase()}</span>
               </button>
               <AnimatePresence>
@@ -284,9 +289,15 @@ const App = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                   >
-                    <button className={language === 'pt' ? 'active' : ''} onClick={() => { setLanguage('pt'); setIsLangOpen(false); }}>PT</button>
-                    <button className={language === 'en' ? 'active' : ''} onClick={() => { setLanguage('en'); setIsLangOpen(false); }}>EN</button>
-                    <button className={language === 'es' ? 'active' : ''} onClick={() => { setLanguage('es'); setIsLangOpen(false); }}>ES</button>
+                    <button className={language === 'pt' ? 'active' : ''} onClick={() => { setLanguage('pt'); setIsLangOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <img src="https://flagcdn.com/br.svg" width="18" alt="PT" style={{ borderRadius: '2px' }} /> PT
+                    </button>
+                    <button className={language === 'en' ? 'active' : ''} onClick={() => { setLanguage('en'); setIsLangOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <img src="https://flagcdn.com/us.svg" width="18" alt="EN" style={{ borderRadius: '2px' }} /> EN
+                    </button>
+                    <button className={language === 'es' ? 'active' : ''} onClick={() => { setLanguage('es'); setIsLangOpen(false); }} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <img src="https://flagcdn.com/es.svg" width="18" alt="ES" style={{ borderRadius: '2px' }} /> ES
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -421,6 +432,15 @@ const App = () => {
 
       </section>
 
+      {/* ===== INTERACTIVE SCULPTURE EASTER EGG ===== */}
+      <GeddyEasterEgg 
+        onSuccess={() => {
+          setIsGershonActive(true);
+          document.getElementById('grid')?.scrollIntoView({ behavior: 'smooth' });
+        }} 
+        t={t} 
+      />
+
       {/* ===== ANIKA NILLES SECTION (DW DRUMS STYLE) ===== */}
       <section className="anika-dw-section" id="anika" ref={anikaRef} style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111' }}>
         {/* Video Background Mask */}
@@ -495,15 +515,6 @@ const App = () => {
 
       {/* ===== SOBRE MIM SECTION (4TH FOLD) ===== */}
       <AboutMeSection t={t} />
-
-      {/* ===== INTERACTIVE SCULPTURE EASTER EGG ===== */}
-      <GeddyEasterEgg 
-        onSuccess={() => {
-          setIsGershonActive(true);
-          document.getElementById('grid')?.scrollIntoView({ behavior: 'smooth' });
-        }} 
-        t={t} 
-      />
 
       {/* ===== CONTEXTUAL BOOK BANNER (MOVED DOWN) ===== */}
       <section className="bento-hero" id="livro" style={{ minHeight: 'auto', padding: '0 5% 4rem 5%', display: 'flex', justifyContent: 'center' }}>

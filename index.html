@@ -1,6 +1,25 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <!-- Script de Redirecionamento Automático de Idioma -->
+    <script>
+      (function() {
+          var urlIngles = '/en/edicao1-ricky-beato-geddy-lee';
+          var urlEspanhol = '/es/edicao1-ricky-beato-geddy-lee';
+          var rotaPortugues = '/edicao1-ricky-beato-geddy-lee';
+          
+          var currentPath = window.location.pathname.replace(/\/$/, "");
+          if (currentPath !== rotaPortugues) return;
+          
+          var rawLang = navigator.language || navigator.userLanguage || "";
+          var lang = rawLang.slice(0, 2).toLowerCase();
+          if (lang === 'pt' || !lang) return;
+          
+          var queryString = window.location.search;
+          if (lang === 'en') window.location.replace(urlIngles + queryString);
+          else if (lang === 'es') window.location.replace(urlEspanhol + queryString);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
