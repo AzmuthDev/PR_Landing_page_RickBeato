@@ -23,9 +23,8 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
   const [successStatus, setSuccessStatus] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [showHintButton, setShowHintButton] = useState(false);
-  const [showHintText, setShowHintText] = useState(false);
   const [showAnimationVideo, setShowAnimationVideo] = useState(false);
+  const [errorCount, setErrorCount] = useState(0);
 
   useEffect(() => {
     if (isUnlocked) return;
@@ -70,7 +69,7 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
         console.log("Incorrect letter! Restarting sequence with ['G']:", ['G']);
       } else {
         setUserCode([]);
-        setShowHintButton(true);
+        setErrorCount(prev => prev + 1);
         console.log("Incorrect letter! Sequence reset.", []);
       }
     }
@@ -94,7 +93,9 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
       {showConfetti && <Confetti recycle={false} numberOfPieces={600} gravity={0.15} />}
       <div className="easter-egg-header">
         <h2>{t.easterEggTitle}</h2>
-        <p className="easter-egg-subtitle">{t.easterEggSubtitle}</p>
+        <p className="easter-egg-subtitle">
+          {isUnlocked ? "YOU GERSHED!!!" : t.easterEggSubtitle}
+        </p>
       </div>
 
       <AnimatePresence mode="wait">
@@ -183,23 +184,63 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
             instruction={t.easterEggInstruction} 
           />
 
-          <div className="easter-egg-controls mt-6 flex justify-center w-full">
-            {showHintButton && !showHintText && (
-              <button className="btn-hint" onClick={(e) => { e.stopPropagation(); setShowHintText(true); }}>
-                <Sparkles size={14} /> Pista
-              </button>
-            )}
-          </div>
+          {/* 1st mistake -> Just text */}
+          {errorCount === 1 && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: '100%', marginTop: '16px' }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="easter-egg-hint-badge"
+                style={{ width: 'fit-content' }}
+              >
+                <Sparkles size={14} />
+                <span>{t.easterEggError1}</span>
+              </motion.div>
+            </div>
+          )}
 
-          {showHintText && (
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="easter-egg-hint-badge"
-            >
-              <Sparkles size={14} />
-              <span>{t.easterEggHint}</span>
-            </motion.div>
+          {/* 2nd mistake -> Image and message */}
+          {errorCount === 2 && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: '100%', marginTop: '16px' }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="easter-egg-hint-badge"
+                style={{ width: 'fit-content' }}
+              >
+                <Sparkles size={14} />
+                <span>{t.easterEggError2}</span>
+              </motion.div>
+              <motion.img 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                src={`${import.meta.env.BASE_URL}Geddy_lee_erro..jpeg`} 
+                alt="Erro 2" 
+                style={{ 
+                  width: '100%', 
+                  maxWidth: '280px', 
+                  borderRadius: '12px', 
+                  border: '2px solid rgba(255, 215, 0, 0.4)', 
+                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.6)',
+                  display: 'block' 
+                }} 
+              />
+            </div>
+          )}
+
+          {/* 3rd mistake -> Message only */}
+          {errorCount >= 3 && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: '100%', marginTop: '16px' }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="easter-egg-hint-badge"
+                style={{ width: 'fit-content' }}
+              >
+                <Sparkles size={14} />
+                <span>{t.easterEggError3}</span>
+              </motion.div>
+            </div>
           )}
 
           {/* Success Alert */}
@@ -256,7 +297,7 @@ export const GeddyEasterEgg = ({ onSuccess, t }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <h3 className="reward-quote">
+            <h3 className="reward-quote" style={{ fontSize: '1.4rem', fontStyle: 'italic', lineHeight: '1.5', textAlign: 'center' }}>
               {t.easterEggRewardQuote}
             </h3>
             <div className="reward-video-wrapper">
