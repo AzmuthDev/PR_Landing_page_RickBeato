@@ -314,6 +314,11 @@ export const CardCarousel = () => {
           gap: 4px;
           padding: 2rem 0;
         }
+        @media (max-width: 768px) {
+          .triple-carousel-wrapper {
+            padding: 0.5rem 0;
+          }
+        }
       `}</style>
 
       {isInView && (

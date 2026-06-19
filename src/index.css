@@ -465,6 +465,12 @@ img { max-width: 100%; display: block; }
   }
 }
 
+@media (max-width: 768px) {
+  .hero-side-panel .accordion-item:nth-child(n+4) {
+    display: none;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero-side-panel {
     max-height: none;
@@ -1588,7 +1594,7 @@ img { max-width: 100%; display: block; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.15;
+  opacity: 0.35;
   filter: grayscale(100%) contrast(1.2);
 }
 
@@ -2165,7 +2171,7 @@ img { max-width: 100%; display: block; }
 
 .easter-egg-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
   gap: 40px;
@@ -2593,6 +2599,12 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 768px) {
+  .interactive-carousel-section {
+    padding: 20px 0 30px;
+  }
+  .interactive-carousel-container {
+    min-height: auto;
+  }
   .interactive-carousel-card {
     width: 180px;
     height: 200px;
@@ -2791,4 +2803,19 @@ img { max-width: 100%; display: block; }
     width: 45%;
     scroll-snap-align: start;
   }
+}
+/* --- Utilities for Mobile/Desktop visibility --- */
+@media (max-width: 768px) {
+  .desktop-only-element { display: none !important; }
+  .mobile-only-element { display: flex !important; justify-content: center; width: 100%; margin-top: 2rem; }
+  
+  .big-money-card {
+    transform: scale(0.9) !important;
+    transform-origin: top center;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only-element { display: none !important; }
+  .desktop-only-element { display: flex !important; }
 }

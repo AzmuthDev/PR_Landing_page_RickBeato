@@ -186,9 +186,6 @@
 
 /* Container Principal (Theme Notas de Dólar / Green) */
 .big-money-card {
-  background: linear-gradient(135deg, #0d3a1e 0%, #175a32 50%, #0d3a1e 100%);
-  border: 2px solid #2ecc71;
-  box-shadow: 0 8px 30px rgba(46, 204, 113, 0.25), inset 0 0 15px rgba(46, 204, 113, 0.15);
   border-radius: 16px;
   padding: 22px;
   width: 100%;
@@ -198,23 +195,6 @@
   gap: 14px;
   color: #eafaf1;
   position: relative;
-  overflow: hidden;
-}
-
-/* O "Varredor" de Brilho que passa por cima do card (Glance effect) */
-.big-money-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -50%; width: 200%; height: 100%;
-  background: linear-gradient(to right, transparent, rgba(46, 204, 113, 0.1), transparent);
-  transform: rotate(35deg);
-  pointer-events: none;
-  animation: shine-sweep 6s infinite linear;
-}
-
-@keyframes shine-sweep {
-  0% { transform: translate(-30%, -30%) rotate(35deg); }
-  100% { transform: translate(30%, 30%) rotate(35deg); }
 }
 
 /* Título THE BIG MONEY */

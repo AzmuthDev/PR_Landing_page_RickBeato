@@ -4,7 +4,9 @@ export const translations = {
   pt: {
     navAEntrevista: "A Entrevista",
     navONovoCapitulo: "O Novo Capítulo",
+    navSobreMim: "Nossa trajetória",
     navLivro: "My Effin' Life",
+    navApoie: "Apoie o Portal",
     heroTitle: "Primeira Edição",
     heroSubtitle: "Sua curadoria de conteúdos do RUSH",
     heroGuidePart1: "Nesta edição: ",
@@ -107,7 +109,9 @@ export const translations = {
   en: {
     navAEntrevista: "The Interview",
     navONovoCapitulo: "The New Chapter",
+    navSobreMim: "Our Journey",
     navLivro: "My Effin' Life",
+    navApoie: "Support the Portal",
     heroTitle: "First Edition",
     heroSubtitle: "Your curation of RUSH content",
     heroGuidePart1: "In this edition: ",
@@ -210,7 +214,9 @@ export const translations = {
   es: {
     navAEntrevista: "La Entrevista",
     navONovoCapitulo: "El Nuevo Capítulo",
+    navSobreMim: "Nuestra Trayectoria",
     navLivro: "My Effin' Life",
+    navApoie: "Apoya el Portal",
     heroTitle: "Primera Edición",
     heroSubtitle: "Su curaduría de contenidos de RUSH",
     heroGuidePart1: "En esta edición: ",

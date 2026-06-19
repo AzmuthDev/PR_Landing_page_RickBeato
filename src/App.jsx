@@ -319,7 +319,9 @@ const App = () => {
             <div className="fullscreen-menu-links">
               <a href="#grid" onClick={() => setIsMenuOpen(false)}>{t.navAEntrevista}</a>
               <a href="#anika" onClick={() => setIsMenuOpen(false)}>{t.navONovoCapitulo}</a>
+              <a href="#RUSH-16-Anos-Alem-do-Improvavel" onClick={() => setIsMenuOpen(false)}>{t.navSobreMim}</a>
               <a href="#livro" onClick={() => setIsMenuOpen(false)}>{t.navLivro}</a>
+              <a href="#apoio" onClick={() => setIsMenuOpen(false)}>{t.navApoie}</a>
             </div>
           </motion.div>
         )}
@@ -350,7 +352,7 @@ const App = () => {
         </div>
           </div>
 
-          <div className="hero-right-col" style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'flex-end', zIndex: 15 }}>
+          <div className="hero-right-col desktop-only-element" style={{ flex: '0 0 auto', justifyContent: 'flex-end', zIndex: 15 }}>
             <BigMoneyCard />
           </div>
         </div>
@@ -428,6 +430,11 @@ const App = () => {
             })}
           </aside>
 
+        </div>
+
+        {/* ===== MOBILE BIG MONEY CARD (BELOW TOPICS) ===== */}
+        <div className="mobile-only-element">
+          <BigMoneyCard />
         </div>
 
       </section>
@@ -546,7 +553,7 @@ const App = () => {
 
 
       {/* ===== SUPPORT & FOOTER SECTION ===== */}
-      <footer className="footer" ref={footerRef}>
+      <footer className="footer" id="apoio" ref={footerRef}>
         {isFooterInView && (
           <video 
             className="footer-video-bg" 
@@ -605,7 +612,9 @@ const App = () => {
               <ul>
                 <li><a href="#grid">{t.navAEntrevista}</a></li>
                 <li><a href="#anika">{t.navONovoCapitulo}</a></li>
-                <li><a href="#livro">{t.footerLink3}</a></li>
+                <li><a href="#RUSH-16-Anos-Alem-do-Improvavel">{t.navSobreMim}</a></li>
+                <li><a href="#livro">{t.navLivro}</a></li>
+                <li><a href="#apoio">{t.navApoie}</a></li>
               </ul>
             </div>
           </div>
